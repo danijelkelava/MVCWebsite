@@ -1,7 +1,7 @@
 <?php
 
 class Bootstrap{
-	
+
 	private $controller;
 	private $action;
 	private $request;
@@ -9,10 +9,11 @@ class Bootstrap{
 	public function __construct($request)
 	{
 		$this->request = $request;
+
 		if ($this->request['controller'] == "") {
 			$this->controller = "home";
 		}else{
-			$this->controller = $this->request;
+			$this->controller = $this->request['controller'];
 		}
 
 		if ($this->request['action'] == "") {
@@ -20,5 +21,12 @@ class Bootstrap{
 		}else{
 			$this->action = $this->request['action'];
 		}
+
+		echo $this->controller;
+	}
+
+	public function createController()
+	{
+		
 	}
 }
