@@ -21,12 +21,31 @@ class Bootstrap{
 		}else{
 			$this->action = $this->request['action'];
 		}
-
-		echo $this->controller;
 	}
 
 	public function createController()
 	{
-		
+		if (class_exists($this->controller)) {
+
+			$parents = class_parents($this->controller);
+
+			if (in_array("Controller", $parents)) {
+
+				if (method_exists($this->controller, $this->action)) {
+					return new $this->controller($this->action, $this->request);
+				}else{
+					echo "Method does not exists!";
+					return;
+				}
+
+			}else{
+				echo "Base controller not found!";
+				return;
+			}
+			
+		}else{
+			echo "Controller class does not exists!";
+			return;
+		}
 	}
 }
