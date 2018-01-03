@@ -16,7 +16,7 @@ abstract class Controller{
 		return $this->{$this->action}();
 	}
 
-	protected function returnView($viewmodel, $fullview)
+	protected function ReturnView($viewmodel, $fullview)
 	{
 		$view = 'views/' . get_class($this) . '/' . $this->action . '.php';
 		if ($fullview) {
