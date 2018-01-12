@@ -13,7 +13,7 @@ abstract class Controller{
 
 	public function executeAction()
 	{
-		return $this->{$this->action}();
+		return $this->{$this->action}();//ako action = "" onda je to index, $this->index()
 	}
 
 	protected function ReturnView($viewmodel, $fullview)

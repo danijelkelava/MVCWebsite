@@ -17,7 +17,7 @@ class Bootstrap{
 		}
 
 		if ($this->request['action'] == "") {
-			$this->action = "index";
+			$this->action = "index";// protected function Index u Home klasi
 		}else{
 			$this->action = $this->request['action'];
 		}
@@ -26,7 +26,7 @@ class Bootstrap{
 	public function createController()
 	{
 		if (class_exists($this->controller)) {
-
+            //vrati klasu roditelja od dane klase, u ovom i svakom slucaju Controller
 			$parents = class_parents($this->controller);
 
 			if (in_array("Controller", $parents)) {
