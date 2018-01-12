@@ -20,7 +20,8 @@ abstract class Controller{
 	{
 		$view = 'views/' . get_class($this) . '/' . $this->action . '.php';
 		if ($fullview) {
-			require 'views/main.php';
+			//require 'views/main.php';
+			echo "hi";
 		}else{
 			require $view;
 		}
