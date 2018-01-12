@@ -1,6 +1,6 @@
 <?php
 
-class ShareModel{
+class UserModel{
 
 	public function Index()
 	{
