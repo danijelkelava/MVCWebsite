@@ -1,5 +1,5 @@
 <div>
-	<a class="btn btn-success btn-share" href="<?php echo ROOT_PATH; ?>shares/add">Add Todo</a>
+	<a class="btn btn-success btn-share" href="/shares/add">Add Todo</a>
 	
 	<?php foreach($viewmodel as $item) : ?>
 		<div class="well">
