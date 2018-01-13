@@ -10,7 +10,7 @@ require "controllers/users.php";
 require "controllers/shares.php";
 
 require "models/home.php";
-require "models/users.php";
+require "models/user.php";
 require "models/share.php";
 
 $bootstrap = new Bootstrap($_GET);
