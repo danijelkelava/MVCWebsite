@@ -1,12 +1,11 @@
 
-<div class="container-fluid jumbotron">          
-  <h1 class="display-5">Create Todo</h1>
-  <hr class="my-4">           
+<div class="container-fluid">          
+  <h1 class="display-6">Create Todo</h1>         
 </div>
 <div class="container">
   <div class="row">
     <div class="col">
-    <form method="post">
+    <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 
       <div class="form-group">
         <label for="title">Ime liste</label>
@@ -17,7 +16,12 @@
         <label for="body">Sadrzaj</label>
         <textarea type="text" class="form-control" id="body" name="body" aria-describedby="" placeholder="Body"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary" name="create_share">Dodaj listu</button>
+
+      <div class="form-group">
+        <label for="link">Link</label>
+        <textarea type="text" class="form-control" id="link" name="link" aria-describedby="" placeholder="Link"></textarea>
+      </div>
+      <input type="submit" class="btn btn-primary" name="create_share" value="Dodaj listu">
       <a class="btn btn-primary" href="<?php echo ROOT_PATH; ?>shares">Cancel</a>
     </form>
     </div>

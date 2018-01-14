@@ -1,10 +1,10 @@
 <?php 
 
 class Shares extends Controller{
-
+	
 	protected function Index()
 	{
-		$viewmodel = new ShareModel();
+		$viewmodel = new ShareModel();		
 		$this->ReturnView($viewmodel->Index(), true);
 	}
 
@@ -13,4 +13,5 @@ class Shares extends Controller{
 		$viewmodel = new ShareModel();
 		$this->ReturnView($viewmodel->add(), true);
 	}
+
 }

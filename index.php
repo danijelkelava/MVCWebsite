@@ -1,6 +1,7 @@
 <?php
 
 require "config.php";
+require "classes/Helper.php";
 require "classes/Bootstrap.php";
 require "classes/Controller.php";
 require "classes/Model.php";

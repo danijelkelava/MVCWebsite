@@ -6,4 +6,4 @@ define("DB_PASS", "");
 define("DB_NAME", "shareboard");
 
 define("ROOT_PATH", "/");
-define("ROOT_URL", "http://localhost/php.oop/");
+define("ROOT_URL", "php.oop");
