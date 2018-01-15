@@ -29,10 +29,10 @@ class Todos extends Controller{
 		$this->ReturnView($viewmodel->add(), true);
 	}
 
-	protected function delete()
+	protected function update()
 	{
 		$viewmodel = new TodoModel();
-		$this->ReturnView($viewmodel->delete(), true);
+		$this->ReturnView($viewmodel->update(), true);
 	}
 
 }

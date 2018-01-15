@@ -40,6 +40,23 @@ class TodoModel extends Model{
 		return;
 	}
 
+	public function update()
+	{
+		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+		if ($post['update_todo']) {
+			$this->query("UPDATE " . $this->table_name . " SET naziv_liste=:naziv_liste WHERE id=:id");
+			$this->bind(":naziv_liste", $post['naziv_liste']);
+			$this->bind(":id", $post['todo_id']);
+			//$this->bind(":IDkorisnika", 8);
+			$this->execute();
+
+			if ($this->lastInsertId()) {
+				header('Location: ' . ROOT_PATH . 'todos');
+			}
+		}
+		return;
+	}
+
 	public function delete()
 	{
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);

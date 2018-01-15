@@ -9,11 +9,7 @@
 
  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <a class="navbar-brand" href="/">Todo App</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <div class="navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="<?php echo ROOT_PATH; ?>">Home <span class="sr-only">(current)</span></a>
@@ -22,19 +18,25 @@
             <a class="nav-link" href="<?php echo ROOT_PATH; ?>todos">Todos</a>
           </li>
         </ul>
-
+        <?php if(isset($_SESSION['is_logged'])) : ?>
+          <ul class="navbar-nav navbar-right">
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo ROOT_PATH; ?>"><?php Helper::htmlout($_SESSION['USER']['ime']); ?></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo ROOT_PATH; ?>users/logout">Logout</a>
+          </li>        
+        </ul>
+        <?php else : ?>
         <ul class="navbar-nav navbar-right">
           <li class="nav-item">
             <a class="nav-link" href="<?php echo ROOT_PATH; ?>users/login">Login <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo ROOT_PATH; ?>users/register">Register</a>
-          </li>
+          </li>        
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <?php endif; ?>
       </div>
     </nav>
 

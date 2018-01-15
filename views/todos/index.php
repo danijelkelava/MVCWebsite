@@ -31,13 +31,13 @@
 	<?php foreach($viewmodel as $todo_lista) : ?>
     <tr>
     <td>
-      <a href="/todoapp/todos/?id=<?php Helper::htmlout($todo_lista['id']);?>"><?php Helper::htmlout($todo_lista['naziv_liste']);?></a>
+      <a href="/todos/id=<?php Helper::htmlout($todo_lista['id']);?>"><?php Helper::htmlout($todo_lista['naziv_liste']);?></a>
     </td>
     <td>
       <p><?php Helper::dateFormat($todo_lista['datum_izrade']);?></p>
     </td>
     <td>
-      <a class="btn btn-info" href="/todoapp/update_todo/?id=<?php Helper::htmlout($todo_lista['id']);?>">update</a>
+      <a class="btn btn-info" href="/todos/update">update</a>
     </td>
     <td>
       <form method="post">

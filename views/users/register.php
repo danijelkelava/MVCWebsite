@@ -1,5 +1,7 @@
-<div class="container-fluid">          
-  <h1 class="display-6">Register</h1>         
+<div class="card">
+  <div class="card-header">
+    <h1>User Register</h1>
+  </div>
 </div>
 <div class="container">
   <div class="row">
@@ -7,8 +9,13 @@
     <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 
       <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" name="name" aria-describedby="" placeholder="Unesite ime">
+        <label for="ime">First Name</label>
+        <input type="text" class="form-control" id="ime" name="ime" aria-describedby="" placeholder="Unesite ime">
+      </div>
+
+      <div class="form-group">
+        <label for="prezime">Last Name</label>
+        <input type="text" class="form-control" id="prezime" name="prezime" aria-describedby="" placeholder="Unesite ime">
       </div>
 
       <div class="form-group">
@@ -17,8 +24,8 @@
       </div>
 
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" aria-describedby="" placeholder="Password">
+        <label for="lozinka">Password</label>
+        <input type="password" class="form-control" id="lozinka" name="lozinka" aria-describedby="" placeholder="Password">
       </div>
       
       <input type="submit" class="btn btn-primary" name="register" value="Register">

@@ -1,7 +1,7 @@
 
 <div class="card">
   <div class="card-header">
-    <h1>Create Todo Form</h1>
+    <h1>Update Todo Form</h1>
   </div>
 </div>
 <div class="container">
@@ -14,9 +14,10 @@
         <input type="text" class="form-control" id="naziv_liste" name="naziv_liste" aria-describedby="" placeholder="Todo Name">
       </div>
 
-      <input type="submit" class="btn btn-primary" name="create_todo" value="Add Todo">
+      <input type="submit" class="btn btn-primary" name="update_todo" value="Update Todo">
       <a class="btn btn-primary" href="<?php echo ROOT_PATH; ?>todos">Cancel</a>
     </form>
     </div>
   </div>
 </div>
+
