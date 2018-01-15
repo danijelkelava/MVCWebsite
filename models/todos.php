@@ -72,12 +72,17 @@ class TodoModel extends Model{
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
 		if ($post['delete_todo_listu']) {
-			//die('this works');
+
 			$this->query("DELETE FROM " . $this->table_name . " WHERE id=:id");
 			$this->bind(":id", $post['todo_id']);
 			$this->execute();
 	    }
-	    //header('Location: ' . ROOT_PATH . 'todos');
+	    return;
+	}
+
+	public function tasks()
+	{
+		return;
 	}
 		
 }

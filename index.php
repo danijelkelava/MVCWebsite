@@ -15,6 +15,7 @@ require "models/home.php";
 require "models/user.php";
 require "models/todos.php";
 
+
 $bootstrap = new Bootstrap($_GET);
 $controller = $bootstrap->createController();//stvorimo klase od fajlova iz controllers fajla
 

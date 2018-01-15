@@ -42,4 +42,12 @@ class Todos extends Controller{
 		
 	}
 
+	protected function tasks()
+	{
+		$this->redirect();
+
+		$viewmodel = new TodoModel();
+		$this->ReturnView($viewmodel->tasks(), true);
+	}
+
 }

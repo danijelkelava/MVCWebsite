@@ -8,7 +8,7 @@ class UserModel extends Model{
 
 		$password = md5($post['lozinka']);
 		if ($post['register']) {
-			//die('register');
+
 			$this->query("INSERT INTO korisnik (ime, prezime, email, lozinka, datum_registracije, active)
 				VALUES(:ime, :prezime, :email, :lozinka, now(), 0)");
 			$this->bind(":ime", $post['ime']);
