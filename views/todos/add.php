@@ -1,6 +1,8 @@
 
-<div class="container-fluid">          
-  <h1 class="display-6">Create Todo</h1>         
+<div class="card">
+  <div class="card-header">
+    <h1>Create Todo Form</h1>
+  </div>
 </div>
 <div class="container">
   <div class="row">

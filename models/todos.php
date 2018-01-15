@@ -50,7 +50,7 @@ class TodoModel extends Model{
 			$this->bind(":id", $post['todo_id']);
 			$this->execute();
 	    }
-	    header('Location: ' . ROOT_PATH . 'todos');
+	    //header('Location: ' . ROOT_PATH . 'todos');
 	}
 		
 }

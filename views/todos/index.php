@@ -1,5 +1,11 @@
 
-<a class="btn btn-success btn-share" href="/todos/add">Add Todo</a>
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title">Todo List</h1>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a class="btn btn-primary" href="/todos/add">Add Todo</a>
+  </div>
+</div>
 
 <form class="form-inline" method="post">
 	<fieldset class="form-group">
@@ -28,7 +34,7 @@
       <a href="/todoapp/todos/?id=<?php Helper::htmlout($todo_lista['id']);?>"><?php Helper::htmlout($todo_lista['naziv_liste']);?></a>
     </td>
     <td>
-      <p><?php Helper::htmlout($todo_lista['datum_izrade']);?></p>
+      <p><?php Helper::dateFormat($todo_lista['datum_izrade']);?></p>
     </td>
     <td>
       <a class="btn btn-info" href="/todoapp/update_todo/?id=<?php Helper::htmlout($todo_lista['id']);?>">update</a>
@@ -38,11 +44,11 @@
         <div class="form-group">
           <input class="btn btn-danger" type="submit" name="delete_todo_listu" value="delete">
         </div>
-        <input type="" name="todo_id" value="<?php Helper::htmlout($todo_lista['id']);?>"> 
+        <input type="hidden" name="todo_id" value="<?php Helper::htmlout($todo_lista['id']);?>"> 
       </form>
     </td> 
     </tr>
-<?php endforeach; ?>
+  <?php endforeach; ?>
   </tbody>
 </table>
 </div>

@@ -14,11 +14,13 @@ class Todos extends Controller{
 			$viewmodel->order = ' ORDER BY naziv_liste ASC';
 		}
 
-		$this->ReturnView($viewmodel->Index(), true);
-
-		if (isset($_POST['delete_todo_listu'])) {
+        if (isset($_POST['delete_todo_listu'])) {
 		   $viewmodel->delete();
 		}
+		
+		$this->ReturnView($viewmodel->Index(), true);
+
+		
 	}
 
 	protected function add()

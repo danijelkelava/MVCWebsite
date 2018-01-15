@@ -7,15 +7,10 @@ class Helper{
 		echo htmlspecialchars($param, ENT_QUOTES, 'UTF-8');
 	}
 
-	public static function order()
+	public static function dateFormat($date)
 	{
-		ShareModel::$order = ' ORDER BY create_date DESC';
-
-		if (isset($_POST['type']) && $_POST['type'] == 'najstarije') {
-	        ShareModel::$order = ' ORDER BY create_date ASC';       
-		}elseif (isset($_POST['type']) && $_POST['type'] == 'po nazivu'){
-			ShareModel::$order = ' ORDER BY title ASC';
-		}
+		$newDate = date_create($date);
+		echo date_format($newDate,"Y/m/d");
 	}
 
 }
