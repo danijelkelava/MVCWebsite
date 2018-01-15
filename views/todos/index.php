@@ -37,7 +37,7 @@
       <p><?php Helper::dateFormat($todo_lista['datum_izrade']);?></p>
     </td>
     <td>
-      <a class="btn btn-info" href="/todos/update">update</a>
+      <a class="btn btn-info" href="/todos/update/<?php Helper::htmlout($todo_lista['id']);?>">update</a>
     </td>
     <td>
       <form method="post">

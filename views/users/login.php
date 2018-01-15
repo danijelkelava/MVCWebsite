@@ -1,6 +1,8 @@
 <div class="card">
   <div class="card-header">
     <h1>User Login</h1>
+    <p class="card-text">Register if you don't have account already.</p>
+    <a class="btn btn-outline-dark" href="<?php echo ROOT_PATH; ?>users/register">Register</a>
   </div>
 </div>
 <div class="container">

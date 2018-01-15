@@ -13,7 +13,7 @@
         <label for="naziv_liste">Ime liste</label>
         <input type="text" class="form-control" id="naziv_liste" name="naziv_liste" aria-describedby="" placeholder="Todo Name">
       </div>
-
+      <input type="" name="todo_id" value="<?php Helper::htmlout($_GET['id']);?>">
       <input type="submit" class="btn btn-primary" name="update_todo" value="Update Todo">
       <a class="btn btn-primary" href="<?php echo ROOT_PATH; ?>todos">Cancel</a>
     </form>
