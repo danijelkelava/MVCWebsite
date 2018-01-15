@@ -32,7 +32,7 @@ class Bootstrap{
 			if (in_array("Controller", $parents)) {
 
 				if (method_exists($this->controller, $this->action)) {
-					ShareModel::order();
+					//TodoModel::order();
 					return new $this->controller($this->action, $this->request);
 				}else{
 					echo "Method does not exists!";

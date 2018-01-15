@@ -8,11 +8,11 @@ require "classes/Model.php";
 
 require "controllers/home.php";
 require "controllers/users.php";
-require "controllers/shares.php";
+require "controllers/todos.php";
 
 require "models/home.php";
 require "models/user.php";
-require "models/share.php";
+require "models/todos.php";
 
 $bootstrap = new Bootstrap($_GET);
 $controller = $bootstrap->createController();//stvorimo klase od fajlova iz controllers fajla
