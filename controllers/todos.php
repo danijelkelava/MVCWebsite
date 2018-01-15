@@ -8,19 +8,19 @@ class Todos extends Controller{
 
 		$viewmodel = new TodoModel();		
 		
-        $viewmodel->order = ' ORDER BY datum_izrade DESC';
+        $viewmodel->order(' ORDER BY datum_izrade DESC');
 
 		if (isset($_POST['type']) && $_POST['type'] == 'najstarije') {
-	        $viewmodel->order = ' ORDER BY datum_izrade ASC';       
+	        $viewmodel->order(' ORDER BY datum_izrade ASC');       
 		}elseif (isset($_POST['type']) && $_POST['type'] == 'po nazivu'){
-			$viewmodel->order = ' ORDER BY naziv_liste ASC';
+			$viewmodel->order(' ORDER BY naziv_liste ASC');
 		}
 
         if (isset($_POST['delete_todo_listu'])) {
 		   $viewmodel->delete();
 		}
-		
-		$this->ReturnView($viewmodel->Index(), true);
+		$id = $_SESSION['USER']['id'];
+		$this->ReturnView($viewmodel->Index($id), true);
 
 		
 	}

@@ -2,23 +2,20 @@
 
 class TodoModel extends Model{
 
-    public $order;
+    private $order;
     private $table_name = "todo";
 
-    public function order()
+    public function order($order)
     {
-		$this->order = ' ORDER BY datum_izrade DESC';
-
-		if (isset($_POST['type']) && $_POST['type'] == 'najstarije') {
-	        $this->$order = ' ORDER BY datum_izrade ASC';       
-		}elseif (isset($_POST['type']) && $_POST['type'] == 'po nazivu'){
-			$this->$order = ' ORDER BY naziv_liste ASC';
-		}
+		$this->order = $order;
 	}
 
-	public function Index()
+	public function Index($id)
 	{
-		$this->query('SELECT * FROM todo ' . $this->order);
+		$this->query("SELECT * FROM " . $this->table_name 
+			                          . " WHERE IDkorisnika=:id"
+			                          . $this->order);
+		$this->bind(":id", $id);
 		$rows = $this->resultSet();
 		return $rows;
 	}
@@ -38,7 +35,7 @@ class TodoModel extends Model{
 			$this->query("INSERT INTO todo (naziv_liste, datum_izrade, IDkorisnika)
 				VALUES(:naziv_liste, now(), :IDkorisnika)");
 			$this->bind(":naziv_liste", $post['naziv_liste']);
-			$this->bind(":IDkorisnika", 8);
+			$this->bind(":IDkorisnika", $post['IDkorisnika']);
 			$this->execute();
 
 			if ($this->lastInsertId()) {
