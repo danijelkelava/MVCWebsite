@@ -4,6 +4,8 @@ class Todos extends Controller{
 	
 	protected function Index()
 	{
+		$this->redirect();
+
 		$viewmodel = new TodoModel();		
 		
         $viewmodel->order = ' ORDER BY datum_izrade DESC';
@@ -25,12 +27,16 @@ class Todos extends Controller{
 
 	protected function add()
 	{
+		$this->redirect();
+
 		$viewmodel = new TodoModel();
 		$this->ReturnView($viewmodel->add(), true);
 	}
 
 	protected function update()
 	{
+		$this->redirect();
+		
 		$viewmodel = new TodoModel();
 		$this->ReturnView($viewmodel->update(), true);
 	}

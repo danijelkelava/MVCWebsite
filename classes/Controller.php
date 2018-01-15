@@ -11,6 +11,13 @@ abstract class Controller{
 		$this->request = $request;
 	}
 
+	public function redirect()
+	{
+		if (!isset($_SESSION['is_logged'])) {
+			header("Location: " . ROOT_PATH . "users/login");
+		}
+	}
+
 	public function executeAction()
 	{
 		return $this->{$this->action}();//ako action = "" onda je to index, $this->index()
@@ -18,6 +25,7 @@ abstract class Controller{
 
 	protected function ReturnView($viewmodel, $fullview)
 	{
+
 		$view = 'views/' . get_class($this) . '/' . $this->action . '.php';
 		if ($fullview) {
 			require 'views/main.php';
