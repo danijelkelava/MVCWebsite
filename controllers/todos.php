@@ -38,7 +38,8 @@ class Todos extends Controller{
 		$this->redirect();
 		
 		$viewmodel = new TodoModel();
-		$this->ReturnView($viewmodel->update(), true);
+		$this->ReturnView($viewmodel->update($_GET['id']), true);
+		
 	}
 
 }

@@ -23,6 +23,14 @@ class TodoModel extends Model{
 		return $rows;
 	}
 
+	public function getTodoById($id)
+	{
+		$this->query("SELECT * FROM " . $this->table_name . " WHERE id=:id");
+		$this->bind(":id", $id);
+		$todo = $this->single();
+		return $todo;
+	}
+
 	public function add()
 	{
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -40,7 +48,7 @@ class TodoModel extends Model{
 		return;
 	}
 
-	public function update()
+	public function update($id)
 	{
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 		if ($post['update_todo']) {
@@ -51,11 +59,15 @@ class TodoModel extends Model{
 			$this->bind(":id", $post['todo_id']);
 			$this->execute();
 
-
-				header('Location: ' . ROOT_PATH . 'todos');
-
+			header('Location: ' . ROOT_PATH . 'todos');
+			return;
 		}
-		return;
+		
+
+		$this->query("SELECT * FROM " . $this->table_name . " WHERE id=:id");
+		$this->bind(":id", $id);
+		$row = $this->single();
+		return $row;
 	}
 
 	public function delete()
