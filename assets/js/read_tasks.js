@@ -5,13 +5,13 @@ $(document).ready(function(){
     
 	function showTasks()
 	{
-		$.getJSON("http://php.oop/test.php", function(data){
+		$.getJSON("http://php.oop/models/tasks.php?id="+id, function(data){
 
 			read_tasks="";
 
 			$.each(data, function(key, val){
-				read_tasks += "<p>" + val + "</p>";
-				read_tasks += "<p>"+ key + "</p>";
+				read_tasks += "<p>" + val.id + "</p>";
+				read_tasks += "<p>"+ val.naziv_taska + "</p>";
 			});
 			$('#test').html(read_tasks);
 		});

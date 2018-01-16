@@ -6,7 +6,6 @@
     <a class="btn btn-primary" href="/todos/add">Add Todo</a>
   </div>
 </div>
-<p id="test"></p>
 <form class="form-inline" method="post">
 	<fieldset class="form-group">
 		<label for="type">Sortiraj po:</label>
