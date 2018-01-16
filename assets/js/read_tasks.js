@@ -30,6 +30,10 @@ $(document).ready(function(){
 					      read_tasks += "<td>" + val.prioritet + "</td>";
 					      read_tasks += "<td>" + val.rok + "</td>";
 					      read_tasks += "<td>" + val.status + "</td>";
+					      read_tasks += "<td></td>";
+					      read_tasks += "<td></td>";
+					      read_tasks += "<td><button type='button' class='btn btn-secondary'>Update</button></td>";
+					      read_tasks += "<td><button type='button' class='btn btn-danger'>Delete</button></td>";
 					    read_tasks += "</tr>";
 					  read_tasks += "</tbody>";
 					read_tasks += "</table>";
