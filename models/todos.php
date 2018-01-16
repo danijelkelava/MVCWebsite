@@ -20,14 +20,6 @@ class TodoModel extends Model{
 		return $rows;
 	}
 
-	public function getTodoById($id)
-	{
-		$this->query("SELECT * FROM " . $this->table_name . " WHERE id=:id");
-		$this->bind(":id", $id);
-		$todo = $this->single();
-		return $todo;
-	}
-
 	public function add()
 	{
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -60,7 +52,6 @@ class TodoModel extends Model{
 			return;
 		}
 		
-
 		$this->query("SELECT * FROM " . $this->table_name . " WHERE id=:id");
 		$this->bind(":id", $id);
 		$row = $this->single();
@@ -82,7 +73,9 @@ class TodoModel extends Model{
 
 	public function tasks()
 	{
-		return;
+		//header('Content-Type: application/json');
+		$test = ["ime"=>"danijel", "prezime"=>"kelava"];
+		echo json_encode($test);
 	}
 		
 }
