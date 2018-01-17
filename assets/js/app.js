@@ -41,10 +41,8 @@ function showTasks(id)
 		}else{
 			$('#test').html(read_tasks);
 		}
-		
-			
-		
-		console.log(data[0]['naziv_taska']);
+				
+		//console.log(data[0]['naziv_taska']);
 		
 	});
 }
