@@ -46,8 +46,9 @@
 
     </main><!-- /.container -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
+    <script src="/assets/js/app.js"></script>
     <script src="/assets/js/read_tasks.js"></script>
     <script src="/assets/js/delete_task.js"></script>
+    <script src="/assets/js/create_task.js"></script>
 </body>
 </html>
