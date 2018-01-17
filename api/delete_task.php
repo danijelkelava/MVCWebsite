@@ -8,13 +8,13 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
  
 require "tasks.php";
 
-$tasks = new TaskModel();
+$task = new TaskModel();
 
 $data = json_decode(file_get_contents("php://input"));
 
-$tasks->id = $data->id;
+$task->id = $data->id;
 
-if($tasks->deleteTask()){
+if($task->deleteTask()){
     $message = "success";
     echo json_encode($message);
 }else{

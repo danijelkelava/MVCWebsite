@@ -2,11 +2,17 @@
 
 require "../config.php";
 require "../classes/Model.php";
+require "../classes/Helper.php";
 
 class TaskModel extends Model{
 
-	public $todoID;
+	
 	public $id;
+	public $naziv_taska;
+	public $prioritet;
+	public $rok;
+	public $status;
+    public $todoID;
 
 	public function getTasksById()
 	{
@@ -22,6 +28,18 @@ class TaskModel extends Model{
 	        return;
 		}
 		
+	}
+
+	public function createTask()
+	{
+		$this->query("INSERT INTO task (naziv_taska, prioritet, rok, todoID)
+	                  VALUES (:naziv_taska, :prioritet, :rok, :todoID)");
+		$this->bind(":naziv_taska", $this->naziv_taska);
+	    $this->bind(":prioritet", $this->prioritet);
+	    $this->bind(":rok", $this->rok);
+	    $this->bind(":todoID", $this->todoID);
+	    $this->execute();
+
 	}
 
 	public function deleteTasK()

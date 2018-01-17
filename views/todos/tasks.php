@@ -21,7 +21,7 @@
 
     <fieldset class="form-group">
     <label for="rok">ROK:</label>
-    <input type="date" class="form-control" id="rok" name="rok" placeholder="MM/DD/YYY" value="" required>
+    <input type="date" class="form-control" id="rok" name="rok" placeholder="MM/DD/YYY" value="">
     </fieldset>
       <input type="" name="todoID" value="<?php Helper::htmlout($_GET['id']); ?>">
     <button class="create-task btn btn-default" type="submit" name="create_task" role="button">Kreiraj task</button> 

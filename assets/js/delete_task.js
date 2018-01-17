@@ -6,7 +6,7 @@ $(document).ready(function(){
 	$(document).on('click', '.delete-task', function(){
 		
 		taskid = $(this).attr('data-id');
-		
+		console.log(JSON.stringify({id: taskid}));
 		$.ajax({
 		  method: "POST",
 		  url: "http://php.oop/api/delete_task.php",
