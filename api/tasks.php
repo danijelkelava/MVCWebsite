@@ -14,10 +14,17 @@ class TaskModel extends Model{
 	public $status;
     public $todoID;
 
+    public function redirect($var)
+	{
+		if (!isset($var)) {
+			header("Location: " . ROOT_PATH . "users/login");
+		}
+	}
+
 	public function getTasksById()
 	{
 		try{
-	        $this->query("SELECT todo.id as todoid, task.id as taskid, prioritet, rok, status, 
+	        $this->query("SELECT task.id as taskid, prioritet, rok, status, 
 		    naziv_taska, DATEDIFF(rok, CURDATE()) as datediff FROM todo left OUTER JOIN task 
 		    ON todoID=todo.id WHERE todo.id=:todoID");
 			$this->bind(":todoID", $this->todoID);
@@ -26,6 +33,9 @@ class TaskModel extends Model{
 		}catch(Exception $e){
 			$_SESSION['error'] = "Database connection error: " . $e->getMessage();
 	        return;
+		}
+		if (!isset($rows)) {
+			echo json_encode('[{}]');
 		}
 		
 	}

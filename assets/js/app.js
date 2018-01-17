@@ -2,7 +2,7 @@
 function showTasks(id)
 {
 	$.getJSON("http://php.oop/api/read_tasks.php?id="+id, function(data){
-
+        empty_div = "<div>There is no tasks</div>";
 		read_tasks="";
         read_tasks += "<table class='table'>";
 			read_tasks += "<thead>";
@@ -34,7 +34,15 @@ function showTasks(id)
 		});
 		  read_tasks += "</tbody>";
 		read_tasks += "</table>";
-		$('#test').html(read_tasks);
+		var count = Object.keys(data).length;
+		
+		if (count>=1) {
+			$('#test').html(read_tasks);
+		}else if(data.naziv_taska == false){
+			$('#test').html(empty_div);
+		}
+		console.log(data[0]['naziv_taska']);
+		
 	});
 }
 

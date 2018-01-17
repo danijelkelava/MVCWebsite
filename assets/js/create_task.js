@@ -14,12 +14,12 @@ $(document).ready(function(){
 		  contentType : 'application/json',
 		  data : form_data
 		}).done(function(msg){
-		  alert("Success");
+		  //alert("Success");
 		  showTasks(id);
 		}).fail(function(msg){
 		  alert("Error" + msg);
 		}).always(function(msg) {
-		  alert("Complete" + msg);
+		  //alert("Complete" + msg);
 		  //showTasks(id);
 		});
 		 
