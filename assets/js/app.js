@@ -36,11 +36,14 @@ function showTasks(id)
 		read_tasks += "</table>";
 		var count = Object.keys(data).length;
 		
-		if (count>=1) {
-			$('#test').html(read_tasks);
-		}else if(data.naziv_taska == false){
+		if (data[0]['naziv_taska'] == null) {
 			$('#test').html(empty_div);
+		}else{
+			$('#test').html(read_tasks);
 		}
+		
+			
+		
 		console.log(data[0]['naziv_taska']);
 		
 	});
