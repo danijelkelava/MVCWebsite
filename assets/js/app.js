@@ -50,28 +50,36 @@ function showTasks(id)
 function readOneTask(taskid){
 	
 	$.getJSON("http://php.oop/api/read_task_by_id.php?id="+taskid, function(data){
-		var naziv_taska = data.naziv_taska;
-		var prioritet = data.prioritet;
-		var rok = data.rok;
-		var status = data.status;
+
+		var naziv_taska = data[0]['naziv_taska'];
+		var prioritet = data[0]['prioritet'];
+		var rok = data[0]['rok'];
+		var status = data[0]['status'];
 
 		update_form = "";
 		    update_form += "<form id='create-task-form' class='bg-info table form-inline' method='post'>";
-
-				$.each(data, function(key, val){   
-				    update_form += "<fieldset class='form-group'>";
-					update_form += "<label for='naziv_taska'>IME ZADATKA:</label>";
-					update_form += "<input type='text' class='form-control' id='naziv_taska' name='naziv_taska' placeholder='Ime zadatka' value='"+naziv_taska+"' required>";
-					update_form += "</fieldset>";
-				});
-
+		    update_form += "<fieldset class='form-group'>";
+			update_form += "<label for='naziv_taska'>IME ZADATKA:</label>";
+			update_form += "<input type='text' class='form-control' id='naziv_taska' name='naziv_taska' placeholder='Ime zadatka' value='"+naziv_taska+"' required>";
+			update_form += "</fieldset>";				
 			update_form += "<fieldset class='form-group'>";
-				update_form += "<label for='prioritet'>PRIORITET:</label>";
-				update_form += "<select id='prioritet' name='prioritet'>"
-				update_form += "<option value='low'>low</option>";
-				update_form += "<option value='norma'l>normal</option>",
-				update_form += "<option value='high'>high</option>";
-				update_form += "</select>";
+			update_form += "<label for='prioritet'>PRIORITET:</label>";
+			update_form += "<select id='prioritet' name='prioritet'>";
+
+			$.each(data[1], function(key, val){ 
+			if (val.id == prioritet) {
+				update_form += "<option value='" + val.id + "' selected>" + val.id + "</option>";	
+			}else{
+				update_form += "<option value='" + val.id + "'>" + val.id + "</option>";
+			}             
+		    	      	 		      		            		      
+			});
+
+			update_form += "</select>";
+			update_form += "</fieldset>";
+			update_form += "<fieldset class='form-group'>";
+			update_form += "<label for='naziv_taska'>ROK:</label>";
+			update_form += "<input type='date' class='form-control' id='rok' name='rok' placeholder='Rok' value='"+rok+"' required>";
 			update_form += "</fieldset>";
 		   update_form += "</form>";
      $('#test2').html(update_form); 
