@@ -80,6 +80,14 @@ class TaskModel extends Model{
 
 	public function readOneTask()
 	{
-		return;
+		$this->query("SELECT * FROM task WHERE id =" . $this->id);
+		$row = $this->single();
+
+		$this->id = $row['id'];
+		$this->naziv_taska = $row['naziv_taska'];
+		$this->prioritet = $row['prioritet'];
+		$this->rok = $row['rok'];
+		$this->status = $row['status'];
+		$this->todoID = $row['todoID'];
 	}
 }

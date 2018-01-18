@@ -8,14 +8,14 @@ require "tasks.php";
 $task = new TaskModel();
 
 $task->id = isset($_GET['taskid']) ? $_GET['taskid'] : die();
+//echo $task->id;
+$data = $task->readOneTask();
 
-//$task->readOneTask();
-echo $task->id;
-$data = ["id"=>"id",
-         "naziv_taska"=>"task->naziv_taska",
-         "prioritet"=>"task->prioritet",
-         "rok"=>"task->rok",
-         "status"=>"task->status"
+$data_arr = ["id"=>$task->id,
+	         "naziv_taska"=>$task->naziv_taska,
+	         "prioritet"=>$task->prioritet,
+	         "rok"=>$task->rok,
+	         "status"=>$task->status
             ];
 
-echo json_encode($data);
+echo json_encode($data_arr);
