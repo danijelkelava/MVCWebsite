@@ -56,11 +56,13 @@ class TaskModel extends Model{
 	{
 		$this->query("UPDATE task SET naziv_taska=:naziv_taska,
 			                          prioritet=:prioritet,
-			                          rok=:rok
+			                          rok=:rok,
+			                          status=:status
 			          WHERE id=:taskID");
 		$this->bind(":naziv_taska", $this->naziv_taska);
 	    $this->bind(":prioritet", $this->prioritet);
 	    $this->bind(":rok", $this->rok);
+	    $this->bind(":status", $this->status);
 	    $this->bind(":taskID", $this->id);
 	    $this->execute();
 	}

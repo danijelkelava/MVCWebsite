@@ -11,6 +11,7 @@ require "tasks.php";
 $task = new TaskModel();
 
 $data = json_decode(file_get_contents("php://input"));
+
 $task->redirect($data);
 
 $newDate = date_create($data->rok);
@@ -21,9 +22,8 @@ $task->naziv_taska = $data->naziv_taska;
 $task->prioritet = $data->prioritet;
 $task->rok = date_format($newDate,"Y/m/d");
 $task->status = $data->status;
-$task->todoID = $data->todoID;
 
-if($task->createTask()){
+if($task->updateTask()){
    $message = "success";
    echo json_encode($message);
 }else{

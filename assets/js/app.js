@@ -47,17 +47,19 @@ function showTasks(id)
 	});
 }
 
-function readOneTask(taskid){
-	
+function readOneTask(taskid)
+{	
 	$.getJSON("http://php.oop/api/read_task_by_id.php?id="+taskid, function(data){
 
+        var taskid = data[0]['id'];
 		var naziv_taska = data[0]['naziv_taska'];
 		var prioritet = data[0]['prioritet'];
 		var rok = data[0]['rok'];
 		var status = data[0]['status'];
 
 		update_form = "";
-		    update_form += "<form id='create-task-form' class='bg-info table form-inline' method='post'>";
+		    update_form += "<form id='update-task-form' class='bg-info table form-inline' method='post'>";
+		    update_form += "<input type='' name='id' value='"+taskid+"'>";
 		    update_form += "<fieldset class='form-group'>";
 			update_form += "<label for='naziv_taska'>IME ZADATKA:</label>";
 			update_form += "<input type='text' class='form-control' id='naziv_taska' name='naziv_taska' placeholder='Ime zadatka' value='"+naziv_taska+"' required>";
@@ -87,10 +89,9 @@ function readOneTask(taskid){
 					update_form += "<option value='" + val.id + "'>" + val.id + "</option>";
 				}             		    	      	 		      		            		      
 			});
-
 			update_form += "</select>";
-			update_form += "</fieldset>";
-			
+			update_form += "<button class='update-task-action btn btn-default' type='submit' name='update_task' role='button'>Update</button>"
+			update_form += "</fieldset>";			
 		   update_form += "</form>";
      $('#test2').html(update_form); 
 		   
@@ -113,20 +114,3 @@ $.fn.serializeObject = function()
     });
     return o;
 };
-
-update_form = "";
-		update_form = "<form id='create-task-form' class='bg-info table form-inline' method='post'>";
-			update_form = "<fieldset class='form-group'>";
-			update_form = "<label for='naziv_taska'>IME ZADATKA:</label>";
-			update_form = "<input type='text' class='form-control' id='naziv_taska' name='naziv_taska' placeholder='Ime zadatka' value='jeee' required>";
-			update_form = "</fieldset>";
-
-		    update_form = "<fieldset class='form-group'>";
-			update_form = "<label for='prioritet'>PRIORITET:</label>";
-			update_form = "<select id='prioritet' name='prioritet'>"
-			update_form = "<option value='low'>low</option>";
-			update_form = "<option value='norma'l>normal</option>",
-			update_form = "<option value='high'>high</option>";
-			update_form = "</select>";
-			update_form = "</fieldset>";
-		update_form = "</form>";
