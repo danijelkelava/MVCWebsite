@@ -61,26 +61,36 @@ function readOneTask(taskid){
 		    update_form += "<fieldset class='form-group'>";
 			update_form += "<label for='naziv_taska'>IME ZADATKA:</label>";
 			update_form += "<input type='text' class='form-control' id='naziv_taska' name='naziv_taska' placeholder='Ime zadatka' value='"+naziv_taska+"' required>";
-			update_form += "</fieldset>";				
-			update_form += "<fieldset class='form-group'>";
-			update_form += "<label for='prioritet'>PRIORITET:</label>";
-			update_form += "<select id='prioritet' name='prioritet'>";
-
-			$.each(data[1], function(key, val){ 
-			if (val.id == prioritet) {
-				update_form += "<option value='" + val.id + "' selected>" + val.id + "</option>";	
-			}else{
-				update_form += "<option value='" + val.id + "'>" + val.id + "</option>";
-			}             
-		    	      	 		      		            		      
-			});
-
-			update_form += "</select>";
 			update_form += "</fieldset>";
 			update_form += "<fieldset class='form-group'>";
 			update_form += "<label for='naziv_taska'>ROK:</label>";
 			update_form += "<input type='date' class='form-control' id='rok' name='rok' placeholder='Rok' value='"+rok+"' required>";
+			update_form += "</fieldset>";				
+			update_form += "<fieldset class='form-group'>";
+			update_form += "<label for='prioritet'>PRIORITET:</label>";
+			update_form += "<select id='prioritet' name='prioritet'>";
+			$.each(data[1], function(key, val){ 
+				if (val.id == prioritet) {
+					update_form += "<option value='" + val.id + "' selected>" + val.id + "</option>";	
+				}else{
+					update_form += "<option value='" + val.id + "'>" + val.id + "</option>";
+				}             		    	      	 		      		            		      
+			});
+			update_form += "</select>";
+            update_form += "<fieldset class='form-group'>";
+			update_form += "<label for='naziv_taska'>STATUS:</label>";
+			update_form += "<select id='status' name='status'>";
+			$.each(data[2], function(key, val){ 
+				if (val.id == status) {
+					update_form += "<option value='" + val.id + "' selected>" + val.id + "</option>";	
+				}else{
+					update_form += "<option value='" + val.id + "'>" + val.id + "</option>";
+				}             		    	      	 		      		            		      
+			});
+
+			update_form += "</select>";
 			update_form += "</fieldset>";
+			
 		   update_form += "</form>";
      $('#test2').html(update_form); 
 		   
