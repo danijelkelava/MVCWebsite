@@ -7,7 +7,7 @@ require "tasks.php";
 
 $task = new TaskModel();
 
-$task->id = isset($_GET['taskid']) ? $_GET['taskid'] : die();
+$task->id = isset($_GET['id']) ? $_GET['id'] : die();
 //echo $task->id;
 $data = $task->readOneTask();
 

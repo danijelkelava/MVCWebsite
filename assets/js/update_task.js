@@ -4,13 +4,9 @@ $(document).ready(function(){
 	$(document).on('click', '.update-task', function(){
 		var taskid = $(this).attr('data-id');
         console.log(taskid);
+        readOneTask(taskid);
 
-        $.getJSON("http://php.oop/api/read_task_by_id.php?id=" + taskid, function(data){
-            var naziv_taska = data.naziv_taska;
-		    var prioritet = data.prioritet;
-		    var rok = data.rok;
-		    var status = data.status     
-        });	    
+        	    
 	})
 });
 /*
