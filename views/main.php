@@ -50,5 +50,6 @@
     <script src="/assets/js/read_tasks.js"></script>
     <script src="/assets/js/delete_task.js"></script>
     <script src="/assets/js/create_task.js"></script>
+    <script src="/assets/js/update_task.js"></script>
 </body>
 </html>

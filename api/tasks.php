@@ -52,6 +52,19 @@ class TaskModel extends Model{
 
 	}
 
+	public function updateTask()
+	{
+		$this->query("UPDATE task SET naziv_taska=:naziv_taska,
+			                          prioritet=:prioritet,
+			                          rok=:rok
+			          WHERE id=:taskID");
+		$this->bind(":naziv_taska", $this->naziv_taska);
+	    $this->bind(":prioritet", $this->prioritet);
+	    $this->bind(":rok", $this->rok);
+	    $this->bind(":taskID", $this->id);
+	    $this->execute();
+	}
+
 	public function deleteTasK()
 	{
 		try{
@@ -63,5 +76,10 @@ class TaskModel extends Model{
 	        return;
 		}
 		
+	}
+
+	public function readOneTask()
+	{
+		return;
 	}
 }

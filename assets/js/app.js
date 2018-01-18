@@ -20,7 +20,7 @@ function showTasks(id)
 		  read_tasks += "<tbody>";
 		$.each(data, function(key, val){
 
-		    read_tasks += "<tr>";
+		    read_tasks += "<tr id='task'>";
 		      read_tasks += "<td>" + val.naziv_taska + "</td>";
 		      read_tasks += "<td>" + val.prioritet + "</td>";
 		      read_tasks += "<td>" + val.rok + "</td>";
@@ -63,3 +63,20 @@ $.fn.serializeObject = function()
     });
     return o;
 };
+
+update_form = "";
+		update_form = "<form id='create-task-form' class='bg-info table form-inline' method='post'>";
+			update_form = "<fieldset class='form-group'>";
+			update_form = "<label for='naziv_taska'>IME ZADATKA:</label>";
+			update_form = "<input type='text' class='form-control' id='naziv_taska' name='naziv_taska' placeholder='Ime zadatka' value='jeee' required>";
+			update_form = "</fieldset>";
+
+		    update_form = "<fieldset class='form-group'>";
+			update_form = "<label for='prioritet'>PRIORITET:</label>";
+			update_form = "<select id='prioritet' name='prioritet'>"
+			update_form = "<option value='low'>low</option>";
+			update_form = "<option value='norma'l>normal</option>",
+			update_form = "<option value='high'>high</option>";
+			update_form = "</select>";
+			update_form = "</fieldset>";
+		update_form = "</form>";
