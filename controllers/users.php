@@ -24,8 +24,10 @@ class Users extends Controller{
 
 	public function activate()
 	{
-		$viewmodel = new UserModel();
-		$this->ReturnView($viewmodel->activate(), true);
+		$viewmodel = new UserModel(); 
+		$viewmodel->id = $_GET['active'];
+        $this->ReturnView($viewmodel->activate(), true);
+        		
 	}
 	
 }

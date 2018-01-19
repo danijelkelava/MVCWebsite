@@ -13,7 +13,7 @@
           <input type="text" class="form-control" id="active" name="activation-code" placeholder="Unesi kod za aktivaciju">
         </fieldset>
         <input type="" name="id" value="<?php echo $_SESSION['id']; ?>" >
-        <input class="btn btn-primary" type="submit" name="activation" value="Aktiviraj se" >
+        <input class="btn btn-primary" type="submit" name="activate" value="Aktiviraj se" >
       </form>
 	</div>
 </div>

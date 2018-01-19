@@ -7,12 +7,13 @@ require 'vendor/autoload.php';
 
 class UserModel extends Model{
 
+	public $id;
+	public $tk;
+
 	public function register()
 	{
         $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-        
-
+       
         if ($post['register']) {
         	$this->query("SELECT * FROM korisnik WHERE email=:email");
 			$this->bind(":email", $post['email']);
@@ -61,7 +62,7 @@ class UserModel extends Model{
 	}
 
 	public function sendEmail($email, $id, $token){
-
+        $link = $_SERVER['HTTP_HOST'] . '/users/activate/?active='.$token.'&id='.$id;
 		$mail = new PHPMailer(true);                           // Passing `true` enables exceptions
 		try {
 	    //Server settings
@@ -101,7 +102,7 @@ class UserModel extends Model{
 	    $message .= '<h3>'.$token.'</h3>';
 	    $message .= '<h1>OR</h1>';
 	    // get varijabla active u url-u activate.php?active kojom cemo dohvatiti $token
-	    $message .= '<h3>' . $_SERVER['HTTP_HOST'] . '/todoapp/activation?active='.$token.'&id='.$id.'</h3>';
+	    $message .= '<a href="' . $link . '">Activate account</a>';
 	    $message .= '</div>';
 
 		$mail->Body = $message;
@@ -148,7 +149,19 @@ class UserModel extends Model{
 
 	public function activate()
 	{
-		return;
+
+		var_dump($this->id);
+		die("proradi");
+		
+		$this->query("UPDATE korisnik SET active=1 WHERE id=:id AND token=:token");
+		$this->bind(":id", $id);
+		$this->bind(":token", $tk);
+		$this->execute();
+	}
+
+	public function activateUser()
+	{
+		echo "yes";
 	}
 
 }
