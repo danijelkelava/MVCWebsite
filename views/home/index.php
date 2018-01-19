@@ -1,7 +1,8 @@
 
 <div class="card text-center">
   <div class="card-header">
-    <h1>Welcome to Todo App</h1>
+    <h1>Welcome to Todo App <?php Helper::htmlout($_SESSION['USER']['IME']); ?></h1>
+    <p>You last login: <?php Helper::htmlout($_SESSION['USER']['LOGIN_DATE']); ?></p>
   </div>
   <div class="card-body">
     <h5 class="card-title">Special title treatment</h5>

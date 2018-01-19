@@ -24,8 +24,8 @@ class UserModel extends Model{
 				$_SESSION['error'] = "Email already exists!";				
 				return;
 		    }else{
-		    	$password = md5($post['lozinka']);
-		    	//$password = password_hash($post['lozinka'], PASSWORD_DEFAULT);
+		    	//$password = md5($post['lozinka']);
+		    	$password = password_hash($post['lozinka'], PASSWORD_DEFAULT);
 		        $token = bin2hex(mt_rand(10,40000));
 
 	            $this->query("INSERT INTO korisnik SET ime=:ime, prezime=:prezime, email=:email, lozinka=:lozinka, token=:token, active=0, datum_registracije=now()");
@@ -46,9 +46,6 @@ class UserModel extends Model{
                 	header('Location: ' . ROOT_PATH . 'users/login');
                 }
 
-				/*if ($this->lastInsertId()) {
-					header('Location: ' . ROOT_PATH . 'users/login');
-				}*/
 		    }
         }
 
@@ -62,7 +59,9 @@ class UserModel extends Model{
 	}
 
 	public function sendEmail($email, $id, $token){
+
         $link = $_SERVER['HTTP_HOST'] . '/users/activate/'.$id.'/'.$token;
+        
 		$mail = new PHPMailer(true);                           // Passing `true` enables exceptions
 		try {
 	    //Server settings
@@ -121,30 +120,44 @@ class UserModel extends Model{
 	{
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-		$password = md5($post['lozinka']);
 		if ($post['login']) {
-			//die('login');
-			unset($_SESSION['activate']);
-			$this->query("SELECT * FROM korisnik WHERE email=:email AND lozinka=:lozinka AND active=1");
 
+			unset($_SESSION['activate']);
+			unset($_SESSION['error_login']);
+			$this->query("SELECT * FROM korisnik WHERE email=:email AND active=1");
 			$this->bind(":email", $post['email']);
-			$this->bind(":lozinka", $password);
 
 			$row = $this->single();
 
-			if ($row) {
-				$_SESSION['is_logged'] = true;
-				$_SESSION['USER'] = [
-					"id" => $row['id'],
-					"ime" => $row['ime'],
-					"prezime" => $row['prezime'],
-					"email" => $row['email']
-				];
-				header('Location: ' . ROOT_PATH . 'todos');
-			}else{
-				$_SESSION['activate'] = "Incorrect credentials!";
-			}
+			if (isset($row)) {
+				$this->query("SELECT * FROM korisnik WHERE id='" . $row['id'] . "' ");
+
+				$row = $this->single();
+
+				if ($post['email'] != $row['email']) {
+					$_SESSION['error_login'] = "Incorrect email!";
+					return;
+				}
+
+				if (password_verify($post['lozinka'], $row['lozinka'])) {
+
+					$_SESSION['is_logged'] = true;
+				    $_SESSION['USER'] = [
+					"ID" => $row['id'],
+					"IME" => $row['ime'],
+					"PREZIME" => $row['prezime'],
+					"EMAIL" => $row['email'],
+					"LOGIN_DATE"=>$row['zadnji_login']
+					];
+					header('Location: ' . ROOT_PATH . 'home');
+					
+				}else{
+					$_SESSION['error_login'] = "Incorrect password!";
+				}
+		    }
 		}
+	
+		
 		return;
 	}
 
@@ -158,5 +171,11 @@ class UserModel extends Model{
 		unset($_SESSION['activate']);
 		$_SESSION['activate'] = "Now you can log in.";
 		header('Location: ' . ROOT_PATH . 'users/login');
+	}
+
+	private function updateLoginTime()
+	{
+		$this->query("UPDATE korisnik SET zadnji_login=now() WHERE id='$id'");
+		$this->execute();
 	}
 }

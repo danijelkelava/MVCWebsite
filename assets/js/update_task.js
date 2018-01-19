@@ -27,7 +27,7 @@ $(document).ready(function(){
 		  alert("Error" + msg);
 		}).always(function(msg) {
 		  //alert("Complete" + msg);
-		  //showTasks(id);
+		  showTasks(id);
 		});
 		 
 		return false;

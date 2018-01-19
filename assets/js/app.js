@@ -20,12 +20,17 @@ function showTasks(id)
 		  read_tasks += "<tbody>";
 		$.each(data, function(key, val){
 
-		    read_tasks += "<tr id='task'>";
+		    read_tasks += "<tr class='task"+val.taskid+"' id='task'>";
 		      read_tasks += "<td>" + val.naziv_taska + "</td>";
 		      read_tasks += "<td>" + val.prioritet + "</td>";
 		      read_tasks += "<td>" + val.rok + "</td>";
 		      read_tasks += "<td>" + val.status + "</td>";
-		      read_tasks += "<td>" + val.datediff + " dana</td>";
+		      if (val.status == "zavrseno") {
+                read_tasks += "<td>-</td>";
+		      }else{
+		      	read_tasks += "<td>" + val.datediff + " dana</td>";
+		      }
+		      
 		      read_tasks += "<td><button data-id='"+val.taskid+"' type='button' class=' finish-task btn btn-outline-success'>Finish</button></td>";
 		      read_tasks += "<td><button data-id='"+val.taskid+"' type='button' class=' update-task btn btn-outline-primary'>Update</button></td>";
 		      read_tasks += "<td><button data-id='"+val.taskid+"' type='button' class=' delete-task btn btn-outline-danger'>Delete</button></td>";
@@ -37,12 +42,11 @@ function showTasks(id)
 		var count = Object.keys(data).length;
 		
 		if (data[0]['naziv_taska'] == null) {
-			$('#test').html(empty_div);
+			$('#tasks').html(empty_div);
 		}else{
-			$('#test').html(read_tasks);
+			$('#tasks').html(read_tasks);
 		}
-				
-		//console.log(data[0]['naziv_taska']);
+
 		
 	});
 }
@@ -58,8 +62,8 @@ function readOneTask(taskid)
 		var status = data[0]['status'];
 
 		update_form = "";
-		    update_form += "<form id='update-task-form' class='bg-info table form-inline' method='post'>";
-		    update_form += "<input type='' name='id' value='"+taskid+"'>";
+		    update_form += "<form id='update-task-form' class='table' method='post'>";
+		    update_form += "<input type='hidden' name='id' value='"+taskid+"'>";
 		    update_form += "<fieldset class='form-group'>";
 			update_form += "<label for='naziv_taska'>IME ZADATKA:</label>";
 			update_form += "<input type='text' class='form-control' id='naziv_taska' name='naziv_taska' placeholder='Ime zadatka' value='"+naziv_taska+"' required>";
@@ -90,10 +94,10 @@ function readOneTask(taskid)
 				}             		    	      	 		      		            		      
 			});
 			update_form += "</select>";
-			update_form += "<button class='update-task-action btn btn-default' type='submit' name='update_task' role='button'>Update</button>"
+			update_form += "<button class='update-task-action btn btn-primary' type='submit' name='update_task' role='button'>Update</button>"
 			update_form += "</fieldset>";			
 		   update_form += "</form>";
-     $('#test2').html(update_form); 
+     $('#tasks').html(update_form); 
 		   
 	});
 }

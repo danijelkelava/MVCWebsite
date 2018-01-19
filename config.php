@@ -6,4 +6,4 @@ define("DB_PASS", "");
 define("DB_NAME", "todoapp");
 
 define("ROOT_PATH", "/");
-define("ROOT_URL", "http://php.oop/");
+define("ROOT_URL", $_SERVER['HTTP_HOST'] . "/");

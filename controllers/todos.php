@@ -19,7 +19,7 @@ class Todos extends Controller{
         if (isset($_POST['delete_todo_listu'])) {
 		   $viewmodel->delete();
 		}
-		$id = $_SESSION['USER']['id'];
+		$id = $_SESSION['USER']['ID'];
 		$this->ReturnView($viewmodel->Index($id), true);
 
 		

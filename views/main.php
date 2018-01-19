@@ -21,7 +21,7 @@
         <?php if(isset($_SESSION['is_logged'])) : ?>
           <ul class="navbar-nav navbar-right">
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo ROOT_PATH; ?>"><?php Helper::htmlout($_SESSION['USER']['ime']); ?></a>
+            <a class="nav-link" href="<?php echo ROOT_PATH; ?>"><?php Helper::htmlout($_SESSION['USER']['IME']); ?></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo ROOT_PATH; ?>users/logout">Logout</a>

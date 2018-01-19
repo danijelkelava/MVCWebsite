@@ -3,7 +3,7 @@
     <h1 id="todo" data-id="<?php Helper::htmlout($_GET['id']);?>">Todo</h1>
   </div>
 </div>
-<div>
+<div id="task-form-div">
   <form id="create-task-form" class="bg-info table form-inline" method="post">
     <fieldset class="form-group">
     <label for="naziv_taska">IME ZADATKA:</label>
@@ -21,19 +21,19 @@
 
     <fieldset class="form-group">
     <label for="rok">ROK:</label>
-    <input type="date" class="form-control" id="rok" name="rok" placeholder="MM/DD/YYY" value="">
+    <input type="date" class="form-control" id="rok" name="rok" placeholder="MM/DD/YYY" value="" required>
     </fieldset>
-      <input type="" name="todoID" value="<?php Helper::htmlout($_GET['id']); ?>">
+      <input type="hidden" name="todoID" value="<?php Helper::htmlout($_GET['id']); ?>">
     <button class="create-task btn btn-default" type="submit" name="create_task" role="button">Kreiraj task</button> 
     </form> 
 </div>
 <div class="container">
   <div class="row">
     <div class="col">
-    <div id="test">
+    <div id="tasks">
     	
     </div>
-    <div id="test2">
+    <div id="tasks2">
       
     </div>
     </div>
