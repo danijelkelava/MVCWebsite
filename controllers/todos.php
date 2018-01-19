@@ -47,6 +47,10 @@ class Todos extends Controller{
 		$this->redirect();
 
 		$viewmodel = new TodoModel();
+		if (isset($_GET['id'])) {
+			$viewmodel->todoID = $_GET['id'];
+			
+		}
 		$this->ReturnView($viewmodel->tasks(), true);
 	}
 

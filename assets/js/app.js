@@ -94,10 +94,32 @@ function readOneTask(taskid)
 				}             		    	      	 		      		            		      
 			});
 			update_form += "</select>";
-			update_form += "<button class='update-task-action btn btn-primary' type='submit' name='update_task' role='button'>Update</button>"
+			update_form += "<button class='update-task-action btn btn-primary' type='submit' name='update_task' role='button'>Update</button>";
+			update_form += "<a class='btn btn-secondary' href='/todos/tasks'>Cancel</a>";
 			update_form += "</fieldset>";			
 		   update_form += "</form>";
      $('#tasks').html(update_form); 
+		   
+	});
+}
+
+function todoInfo(todoID)
+{
+	$.getJSON("http://php.oop/api/todo_info.php?id="+todoID, function(data){
+
+		var status = data.status;
+		var total = data.total;
+		var nedovrseno = data.nedovrseno;
+		var dovrseno = parseFloat(data.dovrseno).toFixed(2);
+
+		todo_info = "";
+		todo_info += "<div>";
+		todo_info += "<p>Ukupno zadataka: "+total+"</p>";
+		todo_info += "<p>Zadataka nedovrseno: "+nedovrseno+" </p>";
+		todo_info += "<p>Dovrseno: "+dovrseno+" %</p>";
+		//todo_info += "<p>"++"</p>";
+		todo_info += "</div>";
+		$('#info').html(todo_info);
 		   
 	});
 }

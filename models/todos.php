@@ -4,6 +4,7 @@ class TodoModel extends Model{
 
     private $order;
     private $table_name = "todo";
+    public $todoID;
 
     public function order($order)
     {
@@ -71,9 +72,11 @@ class TodoModel extends Model{
 	    return;
 	}
 
-	public function tasks()
-	{
-		return;
-	}
+	public function tasks(){
+    	$this->query("SELECT id, naziv_liste, datum_izrade FROM todo WHERE id=:id");
+    	$this->bind(":id", $this->todoID);
+		$row = $this->single();
+    	return $row;
+    }
 		
 }

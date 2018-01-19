@@ -1,7 +1,10 @@
+
 <div class="card">
   <div class="card-header">
-    <h1 id="todo" data-id="<?php Helper::htmlout($_GET['id']);?>">Todo</h1>
+    <h1 id="todo" data-id="<?php Helper::htmlout($_GET['id']);?>"><?php Helper::htmlout($viewmodel['naziv_liste']); ?></h1>
+    <p>Lista kreirana: <?php Helper::htmlout($viewmodel['datum_izrade']); ?></p>
   </div>
+  <div class="card-header" id="info"></div>
 </div>
 <div id="task-form-div">
   <form id="create-task-form" class="bg-info table form-inline" method="post">

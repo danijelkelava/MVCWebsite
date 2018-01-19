@@ -92,4 +92,13 @@ class TaskModel extends Model{
 		$this->status = $row['status'];
 		$this->todoID = $row['todoID'];
 	}
+
+	public function todoInfo()
+	{
+		$this->query("SELECT status, COUNT(*) as total, (SELECT COUNT(*) FROM task WHERE status='nije zavrseno' AND todoID=:todoID) as nedovrseno,
+			       ((SELECT COUNT(*) FROM task WHERE status='zavrseno' AND todoID=:todoID)*100/COUNT(*)) as dovrseno FROM task WHERE todoID=:todoID");
+		$this->bind(":todoID", $this->todoID);
+		$row = $this->single();
+		return $row;
+	}
 }

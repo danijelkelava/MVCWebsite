@@ -22,12 +22,16 @@ $(document).ready(function(){
 		  data : form_data
 		}).done(function(msg){
 		  //alert("Success");
+		  todoInfo(id);
 		  showTasks(id);
+		  
 		}).fail(function(msg){
 		  alert("Error" + msg);
 		}).always(function(msg) {
 		  //alert("Complete" + msg);
+		  todoInfo(id);
 		  showTasks(id);
+		  
 		});
 		 
 		return false;

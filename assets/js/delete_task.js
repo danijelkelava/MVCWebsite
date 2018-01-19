@@ -15,6 +15,7 @@ $(document).ready(function(){
 		  data : JSON.stringify({id: taskid})
 		}).done(function(msg){
 		  //alert("Success");
+		  todoInfo(id);
 		  showTasks(id);
 		}).fail(function(msg){
 		  //alert("Error" + msg);
