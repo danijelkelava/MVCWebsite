@@ -21,5 +21,11 @@ class Users extends Controller{
 		session_destroy();
 		header('Location: ' . ROOT_PATH );
 	}
+
+	public function activate()
+	{
+		$viewmodel = new UserModel();
+		$this->ReturnView($viewmodel->activate(), true);
+	}
 	
 }

@@ -7,6 +7,16 @@
 </div>
 <div class="container">
   <div class="row">
+    <?php 
+      if (isset($_SESSION['activate'])) {
+       echo '<div class="alert alert-danger" role="alert">';
+       echo $_SESSION['activate']; 
+       echo '</div>'; 
+       //unset($_SESSION['activate']);        
+      }
+    ?>
+  </div>
+  <div class="row">
     <div class="col">
     <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 
