@@ -24,8 +24,8 @@ class UserModel extends Model{
 				$_SESSION['error'] = "Email already exists!";				
 				return;
 		    }else{
-		    	//$password = md5($post['lozinka']);
-		    	$password = password_hash($post['lozinka'], PASSWORD_DEFAULT);
+		    	$password = md5($post['lozinka']);
+		    	//$password = password_hash($post['lozinka'], PASSWORD_DEFAULT);
 		        $token = bin2hex(mt_rand(10,40000));
 
 	            $this->query("INSERT INTO korisnik SET ime=:ime, prezime=:prezime, email=:email, lozinka=:lozinka, token=:token, active=0, datum_registracije=now()");
@@ -42,7 +42,7 @@ class UserModel extends Model{
                 	$user = $this->getUser($post['email']);
 				    $_SESSION['id'] = $user['id'];
                 	$this->sendEmail($user['email'], $user['id'], $token);
-                	$_SESSION['activate'] = "Check your email for activation link";
+                	$_SESSION['activate'] = "Check your email for activation link.";
                 	header('Location: ' . ROOT_PATH . 'users/login');
                 }
 
@@ -62,7 +62,7 @@ class UserModel extends Model{
 	}
 
 	public function sendEmail($email, $id, $token){
-        $link = $_SERVER['HTTP_HOST'] . '/users/activate/?active='.$token.'&id='.$id;
+        $link = $_SERVER['HTTP_HOST'] . '/users/activate/'.$id.'/'.$token;
 		$mail = new PHPMailer(true);                           // Passing `true` enables exceptions
 		try {
 	    //Server settings
@@ -124,7 +124,8 @@ class UserModel extends Model{
 		$password = md5($post['lozinka']);
 		if ($post['login']) {
 			//die('login');
-			$this->query("SELECT * FROM korisnik WHERE email=:email AND lozinka=:lozinka");
+			unset($_SESSION['activate']);
+			$this->query("SELECT * FROM korisnik WHERE email=:email AND lozinka=:lozinka AND active=1");
 
 			$this->bind(":email", $post['email']);
 			$this->bind(":lozinka", $password);
@@ -141,7 +142,7 @@ class UserModel extends Model{
 				];
 				header('Location: ' . ROOT_PATH . 'todos');
 			}else{
-				echo "Incorrect login";
+				$_SESSION['activate'] = "Incorrect credentials!";
 			}
 		}
 		return;
@@ -149,19 +150,13 @@ class UserModel extends Model{
 
 	public function activate()
 	{
-
-		var_dump($this->id);
-		die("proradi");
 		
 		$this->query("UPDATE korisnik SET active=1 WHERE id=:id AND token=:token");
-		$this->bind(":id", $id);
-		$this->bind(":token", $tk);
+		$this->bind(":id", $this->id);
+		$this->bind(":token", $this->tk);
 		$this->execute();
+		unset($_SESSION['activate']);
+		$_SESSION['activate'] = "Now you can log in.";
+		header('Location: ' . ROOT_PATH . 'users/login');
 	}
-
-	public function activateUser()
-	{
-		echo "yes";
-	}
-
 }
