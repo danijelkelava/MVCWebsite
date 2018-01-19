@@ -9,10 +9,10 @@
   <div class="row">
     <?php 
       if (isset($_SESSION['activate'])) {
-       echo '<div class="alert alert-danger" role="alert">';
+       echo '<div class="alert alert-primary" role="alert">';
        echo $_SESSION['activate']; 
        echo '</div>'; 
-       //unset($_SESSION['activate']);        
+       unset($_SESSION['activate']);        
       }
     ?>
   </div>
