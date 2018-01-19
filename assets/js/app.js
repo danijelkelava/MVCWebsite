@@ -114,12 +114,12 @@ function todoInfo(todoID)
 
 		todo_info = "";
 		todo_info += "<div>";
-		todo_info += "<p>Ukupno zadataka: "+total+"</p>";
-		todo_info += "<p>Zadataka nedovrseno: "+nedovrseno+" </p>";
+		todo_info += "<span>Ukupno zadataka: "+total+" </span>";
+		todo_info += "<span>Zadataka nedovrseno: "+nedovrseno+" </span>";
 		if (total == 0) {
-			todo_info += "<p>Dovrseno: - %</p>";
+			todo_info += "<span> Dovrseno: - % </span>";
 		}else{
-			todo_info += "<p>Dovrseno: "+dovrseno+" %</p>";
+			todo_info += "<span> Dovrseno: "+dovrseno+" % </span>";
 		}
 		
 		//todo_info += "<p>"++"</p>";
