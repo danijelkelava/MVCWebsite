@@ -116,7 +116,12 @@ function todoInfo(todoID)
 		todo_info += "<div>";
 		todo_info += "<p>Ukupno zadataka: "+total+"</p>";
 		todo_info += "<p>Zadataka nedovrseno: "+nedovrseno+" </p>";
-		todo_info += "<p>Dovrseno: "+dovrseno+" %</p>";
+		if (total == 0) {
+			todo_info += "<p>Dovrseno: - %</p>";
+		}else{
+			todo_info += "<p>Dovrseno: "+dovrseno+" %</p>";
+		}
+		
 		//todo_info += "<p>"++"</p>";
 		todo_info += "</div>";
 		$('#info').html(todo_info);
