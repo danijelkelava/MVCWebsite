@@ -5,8 +5,13 @@ $(document).ready(function(){
 		var taskid = $(this).attr('data-id');
         console.log(taskid);
         readOneTask(taskid);        	    
-	})
-	
+	});
+    
+    $(document).on('click', '.finish-task', function(){
+		var taskid = $(this).attr('data-id');
+                	    
+	});
+
 	var id = $("#todo").attr("data-id");
 	
 	$(document).on('submit', '#update-task-form', function(){

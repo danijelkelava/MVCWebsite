@@ -1,6 +1,6 @@
 
 <div class="card">
-  <div class="card-header">
+  <div class="card-body">
     <h1 id="todo" data-id="<?php Helper::htmlout($_GET['id']);?>"><?php Helper::htmlout($viewmodel['naziv_liste']); ?></h1>
     <p>Lista kreirana: <?php Helper::htmlout($viewmodel['datum_izrade']); ?></p>
     <div id="info"></div>
@@ -30,13 +30,14 @@
       <input type="hidden" name="todoID" value="<?php Helper::htmlout($_GET['id']); ?>">
     <button class="create-task btn btn-default" type="submit" name="create_task" role="button">Kreiraj task</button> 
     </form> 
+    <div id="tasks">
+      
+    </div>
 </div>
 <div class="container">
   <div class="row">
     <div class="col">
-    <div id="tasks">
-    	
-    </div>
+    
     <div id="tasks2">
       
     </div>

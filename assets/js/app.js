@@ -1,7 +1,11 @@
 
+
+var root_url = window.location.hostname;
+var current_url = window.location.href;
+
 function showTasks(id)
 {
-	$.getJSON("http://php.oop/api/read_tasks.php?id="+id, function(data){
+	$.getJSON("http://" + root_url + "/api/read_tasks.php?id=" + id, function(data){
         empty_div = "<div>There is no tasks</div>";
 		read_tasks="";
         read_tasks += "<table class='table'>";
@@ -47,15 +51,13 @@ function showTasks(id)
 			$('#tasks').html(empty_div);
 		}else{
 			$('#tasks').html(read_tasks);
-		}
-
-		
+		}		
 	});
 }
 
 function readOneTask(taskid)
 {	
-	$.getJSON("http://php.oop/api/read_task_by_id.php?id="+taskid, function(data){
+	$.getJSON("http://" + root_url + "/api/read_task_by_id.php?id=" + taskid, function(data){
 
         var taskid = data[0]['id'];
 		var naziv_taska = data[0]['naziv_taska'];
@@ -64,7 +66,7 @@ function readOneTask(taskid)
 		var status = data[0]['status'];
 
 		update_form = "";
-		    update_form += "<form id='update-task-form' class='' method='post'>";
+		    update_form += "<form id='update-task-form' class='form-inline' method='post'>";
 		    update_form += "<input type='hidden' name='id' value='"+taskid+"'>";
 		    update_form += "<fieldset class='form-group'>";
 			update_form += "<label for='naziv_taska'>IME ZADATKA:</label>";
@@ -99,7 +101,7 @@ function readOneTask(taskid)
 			update_form += "</fieldset>";
 			update_form += "<fieldset class='form-group'>";
 			update_form += "<button class='update-task-action btn btn-primary' type='submit' name='update_task' role='button'>Update</button>";
-			update_form += "<a class='btn btn-secondary' href='/todos/tasks'>Cancel</a>";
+			update_form += "<a class='btn btn-secondary' href='"+current_url+"'>Cancel</a>";
 
 			update_form += "</fieldset>";			
 		   update_form += "</form>";
@@ -110,7 +112,7 @@ function readOneTask(taskid)
 
 function todoInfo(todoID)
 {
-	$.getJSON("http://php.oop/api/todo_info.php?id="+todoID, function(data){
+	$.getJSON("http://" + root_url + "/api/todo_info.php?id=" + todoID, function(data){
 
 		var status = data.status;
 		var total = data.total;

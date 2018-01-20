@@ -15,15 +15,15 @@ $(document).ready(function(){
 		  data : form_data
 		}).done(function(msg){
 		  //alert("Success");
-		  //$("#create-task-form").reset();
+		  $("#create-task-form").trigger('reset');
+		  //$("#create-task-form")[0].reset();
 		  todoInfo(id);
 		  showTasks(id);
-
 		}).fail(function(msg){
 		  alert("Error" + msg);
-		});
-		 
+		});		 
 		return false;
 	});
 
+	
 });
