@@ -27,11 +27,6 @@ $(document).ready(function(){
 		  
 		}).fail(function(msg){
 		  alert("Error" + msg);
-		}).always(function(msg) {
-		  //alert("Complete" + msg);
-		  todoInfo(id);
-		  showTasks(id);
-		  
 		});
 		 
 		return false;

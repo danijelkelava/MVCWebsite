@@ -53,9 +53,15 @@ class UserModel extends Model{
 	}
 
 	private function getUser($email){
-		$this->query("SELECT * FROM korisnik WHERE email='$email'");
-		$row = $this->single();
-		return $row;
+		try{
+	        $this->query("SELECT * FROM korisnik WHERE email='$email'");
+			$row = $this->single();
+			return $row;
+		}catch(Exception $e){
+            $_SESSION['error'] = "Database connection error: " . $e->getMessage();
+	        return;
+		}
+		
 	}
 
 	public function sendEmail($email, $id, $token){
@@ -155,27 +161,35 @@ class UserModel extends Model{
 					$_SESSION['error_login'] = "Incorrect password!";
 				}
 		    }
-		}
-	
-		
+		}			
 		return;
 	}
 
 	public function activate()
 	{
-		
-		$this->query("UPDATE korisnik SET active=1 WHERE id=:id AND token=:token");
-		$this->bind(":id", $this->id);
-		$this->bind(":token", $this->tk);
-		$this->execute();
-		unset($_SESSION['activate']);
-		$_SESSION['activate'] = "Now you can log in.";
-		header('Location: ' . ROOT_PATH . 'users/login');
+	    try{
+	        $this->query("UPDATE korisnik SET active=1 WHERE id=:id AND token=:token");
+			$this->bind(":id", $this->id);
+			$this->bind(":token", $this->tk);
+			$this->execute();
+			unset($_SESSION['activate']);
+			$_SESSION['activate'] = "Now you can log in.";
+			header('Location: ' . ROOT_PATH . 'users/login');
+	    }catch(Exception $e){
+	    	$_SESSION['error'] = "Database connection error: " . $e->getMessage();
+	        return;
+	    }			
 	}
 
 	private function updateLoginTime()
 	{
-		$this->query("UPDATE korisnik SET zadnji_login=now() WHERE id='$id'");
-		$this->execute();
+		try{
+	        $this->query("UPDATE korisnik SET zadnji_login=now() WHERE id='$id'");
+			$this->execute();
+	    }catch(Exception $e){
+	    	$_SESSION['error'] = "Database connection error: " . $e->getMessage();
+	        return;
+	    }
+		
 	}
 }

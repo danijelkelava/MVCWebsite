@@ -6,7 +6,7 @@ $(document).ready(function(){
 
         var form_data=JSON.stringify($(this).serializeObject());
         console.log(form_data);
-
+       
 		$.ajax({
 		  method: "POST",
 		  url: "http://php.oop/api/create_task.php",
@@ -15,13 +15,12 @@ $(document).ready(function(){
 		  data : form_data
 		}).done(function(msg){
 		  //alert("Success");
+		  //$("#create-task-form").reset();
 		  todoInfo(id);
 		  showTasks(id);
+
 		}).fail(function(msg){
 		  alert("Error" + msg);
-		}).always(function(msg) {
-		  //alert("Complete" + msg);
-		  //showTasks(id);
 		});
 		 
 		return false;

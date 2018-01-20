@@ -7,6 +7,7 @@ $(document).ready(function(){
 		
 		taskid = $(this).attr('data-id');
 		console.log(JSON.stringify({id: taskid}));
+		
 		$.ajax({
 		  method: "POST",
 		  url: "http://php.oop/api/delete_task.php",
@@ -19,29 +20,7 @@ $(document).ready(function(){
 		  showTasks(id);
 		}).fail(function(msg){
 		  //alert("Error" + msg);
-		}).always(function(msg) {
-		  //lert("Complete" + msg);
-		  showTasks(id);
 		});
-
-		/*$.ajax({
-        url : "http://php.oop/api/delete_task.php",
-        type : "POST",
-        dataType : 'json',
-        contentType : 'application/json',
-        data : JSON.stringify({id: taskid}),
-        success : function(result) { 
-            // re-load list of products
-            showTasks();
-        },
-        error: function(xhr, resp, text) {
-            console.log(xhr, resp, text);
-        }
-        });
-
-        $(document).ajaxStop(function(){
-		    window.location.reload();
-		});*/
 
 	});
 });

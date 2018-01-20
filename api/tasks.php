@@ -34,6 +34,7 @@ class TaskModel extends Model{
 			$_SESSION['error'] = "Database connection error: " . $e->getMessage();
 	        return;
 		}
+
 		if (!isset($rows)) {
 			echo json_encode('[{}]');
 		}
@@ -42,29 +43,41 @@ class TaskModel extends Model{
 
 	public function createTask()
 	{
-		$this->query("INSERT INTO task (naziv_taska, prioritet, rok, todoID)
-	                  VALUES (:naziv_taska, :prioritet, :rok, :todoID)");
-		$this->bind(":naziv_taska", $this->naziv_taska);
-	    $this->bind(":prioritet", $this->prioritet);
-	    $this->bind(":rok", $this->rok);
-	    $this->bind(":todoID", $this->todoID);
-	    $this->execute();
+		try{
+	        $this->query("INSERT INTO task (naziv_taska, prioritet, rok, todoID)
+		                  VALUES (:naziv_taska, :prioritet, :rok, :todoID)");
+			$this->bind(":naziv_taska", $this->naziv_taska);
+		    $this->bind(":prioritet", $this->prioritet);
+		    $this->bind(":rok", $this->rok);
+		    $this->bind(":todoID", $this->todoID);
+		    $this->execute();
+		}catch(Exception $e){
+			$_SESSION['error'] = "Database connection error: " . $e->getMessage();
+	        return;
+		}
+		
 
 	}
 
 	public function updateTask()
 	{
-		$this->query("UPDATE task SET naziv_taska=:naziv_taska,
-			                          prioritet=:prioritet,
-			                          rok=:rok,
-			                          status=:status
-			          WHERE id=:taskID");
-		$this->bind(":naziv_taska", $this->naziv_taska);
-	    $this->bind(":prioritet", $this->prioritet);
-	    $this->bind(":rok", $this->rok);
-	    $this->bind(":status", $this->status);
-	    $this->bind(":taskID", $this->id);
-	    $this->execute();
+		try{
+	        $this->query("UPDATE task SET naziv_taska=:naziv_taska,
+				                          prioritet=:prioritet,
+				                          rok=:rok,
+				                          status=:status
+				          WHERE id=:taskID");
+			$this->bind(":naziv_taska", $this->naziv_taska);
+		    $this->bind(":prioritet", $this->prioritet);
+		    $this->bind(":rok", $this->rok);
+		    $this->bind(":status", $this->status);
+		    $this->bind(":taskID", $this->id);
+		    $this->execute();
+		}catch(Exception $e){
+			$_SESSION['error'] = "Database connection error: " . $e->getMessage();
+	        return;
+		}
+		
 	}
 
 	public function deleteTasK()
@@ -82,23 +95,35 @@ class TaskModel extends Model{
 
 	public function readOneTask()
 	{
-		$this->query("SELECT * FROM task WHERE id =" . $this->id);
-		$row = $this->single();
-
-		$this->id = $row['id'];
-		$this->naziv_taska = $row['naziv_taska'];
-		$this->prioritet = $row['prioritet'];
-		$this->rok = $row['rok'];
-		$this->status = $row['status'];
-		$this->todoID = $row['todoID'];
+		try{
+			$this->query("SELECT * FROM task WHERE id =" . $this->id);
+			$row = $this->single();
+		}catch(Exception $e){
+			$_SESSION['error'] = "Database connection error: " . $e->getMessage();
+	        return;
+		}
+		if ($row) {
+			$this->id = $row['id'];
+			$this->naziv_taska = $row['naziv_taska'];
+			$this->prioritet = $row['prioritet'];
+			$this->rok = $row['rok'];
+			$this->status = $row['status'];
+			$this->todoID = $row['todoID'];
+		}
+		
 	}
 
 	public function todoInfo()
 	{
-		$this->query("SELECT status, COUNT(*) as total, (SELECT COUNT(*) FROM task WHERE status='nije zavrseno' AND todoID=:todoID) as nedovrseno,
-			       ((SELECT COUNT(*) FROM task WHERE status='zavrseno' AND todoID=:todoID)*100/COUNT(*)) as dovrseno FROM task WHERE todoID=:todoID");
-		$this->bind(":todoID", $this->todoID);
-		$row = $this->single();
-		return $row;
+		try{
+	        $this->query("SELECT status, COUNT(*) as total, (SELECT COUNT(*) FROM task WHERE status='nije zavrseno' AND todoID=:todoID) as nedovrseno,
+				       ((SELECT COUNT(*) FROM task WHERE status='zavrseno' AND todoID=:todoID)*100/COUNT(*)) as dovrseno FROM task WHERE todoID=:todoID");
+			$this->bind(":todoID", $this->todoID);
+			$row = $this->single();
+			return $row;
+		}catch(Exception $e){
+			$_SESSION['error'] = "Database connection error: " . $e->getMessage();
+	        return;
+		}		
 	}
 }

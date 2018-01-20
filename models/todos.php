@@ -73,10 +73,15 @@ class TodoModel extends Model{
 	}
 
 	public function tasks(){
-    	$this->query("SELECT id, naziv_liste, datum_izrade FROM todo WHERE id=:id");
-    	$this->bind(":id", $this->todoID);
-		$row = $this->single();
-    	return $row;
+		try{
+	        $this->query("SELECT id, naziv_liste, datum_izrade FROM todo WHERE id=:id");
+	    	$this->bind(":id", $this->todoID);
+			$row = $this->single();
+	    	return $row;
+		}catch(Exception $e){
+			$_SESSION['error'] = "Database connection error: " . $e->getMessage();
+	        return;
+		}    	
     }
 		
 }
