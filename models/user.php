@@ -103,10 +103,7 @@ class UserModel extends Model{
 	    $mail->isHTML(true);                                  // Set email format to HTML
 	    $mail->Subject = 'Here is the subject';
 	    $message = '<div>';
-	    $message .= '<h6>Your activation code</h6>';
-	    $message .= '<h3>'.$token.'</h3>';
-	    $message .= '<h1>OR</h1>';
-	    // get varijabla active u url-u activate.php?active kojom cemo dohvatiti $token
+	    $message .= '<h6>Your activation link</h6>';
 	    $message .= '<a href="' . $link . '">Activate account</a>';
 	    $message .= '</div>';
 

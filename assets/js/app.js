@@ -115,11 +115,6 @@ function readOneTask(taskid)
 	});
 }
 
-function finishTask(taskid)
-{
-
-}
-
 function todoInfo(todoID)
 {
 	$.getJSON("http://" + root_url + "/api/todo_info.php?id=" + todoID, function(data){

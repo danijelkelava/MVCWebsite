@@ -11,6 +11,7 @@ require "tasks.php";
 $task = new TaskModel();
 
 $data = json_decode(file_get_contents("php://input"));
+$task->redirect($data);
 
 $task->id = $data->id;
 

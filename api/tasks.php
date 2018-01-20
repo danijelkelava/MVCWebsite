@@ -13,6 +13,8 @@ class TaskModel extends Model{
 	public $rok;
 	public $status;
     public $todoID;
+    public $where;
+    public $order;
 
     public function redirect($var)
 	{
@@ -26,7 +28,7 @@ class TaskModel extends Model{
 		try{
 	        $this->query("SELECT task.id as taskid, prioritet, rok, status, 
 		    naziv_taska, DATEDIFF(rok, CURDATE()) as datediff FROM todo left OUTER JOIN task 
-		    ON todoID=todo.id WHERE todo.id=:todoID");
+		    ON todoID=todo.id WHERE todo.id=:todoID" . $this->where . "" . $this->order);
 			$this->bind(":todoID", $this->todoID);
 			$rows = $this->resultSet();
 			return $rows;

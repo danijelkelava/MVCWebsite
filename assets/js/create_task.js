@@ -9,7 +9,7 @@ $(document).ready(function(){
        
 		$.ajax({
 		  method: "POST",
-		  url: "http://php.oop/api/create_task.php",
+		  url: "http://" + root_url + "/api/create_task.php",
 		  dataType : 'json',
 		  contentType : 'application/json',
 		  data : form_data

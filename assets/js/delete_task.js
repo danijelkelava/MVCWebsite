@@ -11,7 +11,7 @@ $(document).ready(function(){
 
 		$.ajax({
 		  method: "POST",
-		  url: "http://php.oop/api/delete_task.php",
+		  url: "http://" + root_url + "/api/delete_task.php",
 		  dataType : 'json',
 		  contentType : 'application/json',
 		  data : JSON.stringify({id: taskid})

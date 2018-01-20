@@ -21,7 +21,7 @@ $(document).ready(function(){
 
 		$.ajax({
 		  method: "POST",
-		  url: "http://php.oop/api/update_task.php",
+		  url: "http://" + root_url + "/api/update_task.php",
 		  dataType : 'json',
 		  contentType : 'application/json',
 		  data : form_data

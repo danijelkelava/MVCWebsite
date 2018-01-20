@@ -52,5 +52,6 @@
 <script src="/assets/js/create_task.js"></script>
 <script src="/assets/js/update_task.js"></script>
 <script src="/assets/js/finish_task.js"></script>
+<script src="/assets/js/order_task.js"></script>
 </body>
 </html>
