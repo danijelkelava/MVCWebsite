@@ -113,6 +113,18 @@ class TaskModel extends Model{
 		
 	}
 
+	public function finishTask()
+	{
+		try{
+			$this->query("UPDATE task SET status='zavrseno' WHERE id=:id");
+			$this->bind(":id", $this->id);
+			$this->execute();
+		}catch(Exception $e){
+			$_SESSION['error'] = "Database connection error: " . $e->getMessage();
+	        return;
+		}
+	}
+
 	public function todoInfo()
 	{
 		try{

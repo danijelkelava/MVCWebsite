@@ -29,6 +29,7 @@ function showTasks(id)
 		      read_tasks += "<td>" + val.prioritet + "</td>";
 		      read_tasks += "<td>" + val.rok + "</td>";
 		      read_tasks += "<td>" + val.status + "</td>";
+
 		      if (val.status == "zavrseno") {
                 read_tasks += "<td>-</td>";
 		      }else if(val.datediff < 0){
@@ -36,8 +37,12 @@ function showTasks(id)
 		      }else{
 		      	read_tasks += "<td>" + Math.abs(val.datediff) + " dana</td>";
 		      }
+		      if (val.status == "zavrseno") {
+		      	read_tasks += "<td><button data-id='"+val.taskid+"' type='button' class=' finish-task btn btn-outline-success' disabled >Finish</button></td>";
+		      }else{
+		      	read_tasks += "<td><button data-id='"+val.taskid+"' type='button' class=' finish-task btn btn-outline-success'>Finish</button></td>";
+		      }
 		      
-		      read_tasks += "<td><button data-id='"+val.taskid+"' type='button' class=' finish-task btn btn-outline-success'>Finish</button></td>";
 		      read_tasks += "<td><button data-id='"+val.taskid+"' type='button' class=' update-task btn btn-outline-primary'>Update</button></td>";
 		      read_tasks += "<td><button data-id='"+val.taskid+"' type='button' class=' delete-task btn btn-outline-danger'>Delete</button></td>";
 		    read_tasks += "</tr>";
@@ -108,6 +113,11 @@ function readOneTask(taskid)
      $('#tasks').html(update_form); 
 		   
 	});
+}
+
+function finishTask(taskid)
+{
+
 }
 
 function todoInfo(todoID)
