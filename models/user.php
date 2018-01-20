@@ -146,7 +146,7 @@ class UserModel extends Model{
 				}
 
 				if (password_verify($post['lozinka'], $row['lozinka'])) {
-
+                    $this->updateLoginTime($row['id']);
 					$_SESSION['is_logged'] = true;
 				    $_SESSION['USER'] = [
 					"ID" => $row['id'],
@@ -181,7 +181,7 @@ class UserModel extends Model{
 	    }			
 	}
 
-	private function updateLoginTime()
+	private function updateLoginTime($id)
 	{
 		try{
 	        $this->query("UPDATE korisnik SET zadnji_login=now() WHERE id='$id'");
