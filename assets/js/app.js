@@ -27,8 +27,10 @@ function showTasks(id)
 		      read_tasks += "<td>" + val.status + "</td>";
 		      if (val.status == "zavrseno") {
                 read_tasks += "<td>-</td>";
+		      }else if(val.datediff < 0){
+		      	read_tasks += "<td><span class='badge badge-warning'>Kasnjenje</span> " + Math.abs(val.datediff) + " dana</td>";
 		      }else{
-		      	read_tasks += "<td>" + val.datediff + " dana</td>";
+		      	read_tasks += "<td>" + Math.abs(val.datediff) + " dana</td>";
 		      }
 		      
 		      read_tasks += "<td><button data-id='"+val.taskid+"' type='button' class=' finish-task btn btn-outline-success'>Finish</button></td>";
@@ -62,7 +64,7 @@ function readOneTask(taskid)
 		var status = data[0]['status'];
 
 		update_form = "";
-		    update_form += "<form id='update-task-form' class='table' method='post'>";
+		    update_form += "<form id='update-task-form' class='' method='post'>";
 		    update_form += "<input type='hidden' name='id' value='"+taskid+"'>";
 		    update_form += "<fieldset class='form-group'>";
 			update_form += "<label for='naziv_taska'>IME ZADATKA:</label>";
@@ -94,8 +96,11 @@ function readOneTask(taskid)
 				}             		    	      	 		      		            		      
 			});
 			update_form += "</select>";
+			update_form += "</fieldset>";
+			update_form += "<fieldset class='form-group'>";
 			update_form += "<button class='update-task-action btn btn-primary' type='submit' name='update_task' role='button'>Update</button>";
 			update_form += "<a class='btn btn-secondary' href='/todos/tasks'>Cancel</a>";
+
 			update_form += "</fieldset>";			
 		   update_form += "</form>";
      $('#tasks').html(update_form); 
@@ -113,17 +118,17 @@ function todoInfo(todoID)
 		var dovrseno = parseFloat(data.dovrseno).toFixed(2);
 
 		todo_info = "";
-		todo_info += "<div>";
-		todo_info += "<span>Ukupno zadataka: "+total+" </span>";
-		todo_info += "<span>Zadataka nedovrseno: "+nedovrseno+" </span>";
+		todo_info += "<table class='table'>";
+		todo_info += "<tr>";
+		todo_info += "<td>Ukupno zadataka: "+total+" </td>";
+		todo_info += "<td>Nedovrseno zadataka: "+nedovrseno+" </td>";
 		if (total == 0) {
-			todo_info += "<span> Dovrseno: - % </span>";
+			todo_info += "<td> Dovrseno: - % </td>";
 		}else{
-			todo_info += "<span> Dovrseno: "+dovrseno+" % </span>";
+			todo_info += "<td> Dovrseno: "+dovrseno+" % </td>";
 		}
-		
-		//todo_info += "<p>"++"</p>";
-		todo_info += "</div>";
+		todo_info += "<tr>";
+		todo_info += "</table>";
 		$('#info').html(todo_info);
 		   
 	});

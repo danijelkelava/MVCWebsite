@@ -3,8 +3,9 @@
   <div class="card-header">
     <h1 id="todo" data-id="<?php Helper::htmlout($_GET['id']);?>"><?php Helper::htmlout($viewmodel['naziv_liste']); ?></h1>
     <p>Lista kreirana: <?php Helper::htmlout($viewmodel['datum_izrade']); ?></p>
+    <div class="" id="info"></div>
   </div>
-  <div class="" id="info"></div>
+  
 </div>
 <div id="task-form-div">
   <form id="create-task-form" class="bg-info table form-inline" method="post">
