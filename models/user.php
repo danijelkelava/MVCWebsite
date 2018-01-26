@@ -130,7 +130,12 @@ class UserModel extends Model{
 			$this->bind(":email", $post['email']);
 
 			$row = $this->single();
-            
+
+            if (empty($row)) {
+            	Helper::setMessage("error", "error");
+            	return;
+            }
+
 			if (isset($row)) {
 				$this->query("SELECT * FROM korisnik WHERE id='" . $row['id'] . "' ");
 
