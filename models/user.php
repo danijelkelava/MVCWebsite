@@ -13,15 +13,13 @@ class UserModel extends Model{
 	public function register()
 	{
         $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-       
+
         if ($post['register']) {
         	$this->query("SELECT * FROM korisnik WHERE email=:email");
 			$this->bind(":email", $post['email']);
 
-			//$this->execute();
-
 			if ($this->single() > 0) {
-				Helper::setMessage("Email already exists!", "error");			
+				Helper::setMessage("Email already exists!", "error");	
 				return;
 		    }else{
 		    	//$password = md5($post['lozinka']);
@@ -42,14 +40,16 @@ class UserModel extends Model{
                 	$user = $this->getUser($post['email']);
 				    $_SESSION['id'] = $user['id'];
                 	$this->sendEmail($user['email'], $user['id'], $token);
-                	$_SESSION['activate'] = "Check your email for activation link.";
+                	Helper::setMessage("Check your email for activation link.", "success");
                 	header('Location: ' . ROOT_PATH . 'users/login');
+                	return;
                 }
 
 		    }
         }
 
 		return;	
+        
 	}
 
 	private function getUser($email){
@@ -125,8 +125,7 @@ class UserModel extends Model{
 
 		if ($post['login']) {
 
-			unset($_SESSION['activate']);
-			unset($_SESSION['error_login']);
+			unset($_SESSION['SUCCESS_MSG']);
 			$this->query("SELECT * FROM korisnik WHERE email=:email AND active=1");
 			$this->bind(":email", $post['email']);
 
@@ -170,8 +169,7 @@ class UserModel extends Model{
 			$this->bind(":token", $this->tk);
 			$this->execute();
 			unset($_SESSION['activate']);
-			//Helper::setMessage("Now you can log in.");
-			$_SESSION['activate'] = "Now you can log in.";
+			Helper::setMessage("Now you can log in.", "success");
 			header('Location: ' . ROOT_PATH . 'users/login');
 	    }catch(Exception $e){
 	    	$_SESSION['error'] = "Database connection error: " . $e->getMessage();

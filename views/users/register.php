@@ -4,16 +4,6 @@
   </div>
 </div>
 <div class="container">
-   <div class="row">
-    <?php 
-      if (isset($_SESSION['error'])) {
-       echo '<div class="alert alert-danger" role="alert">';
-       echo $_SESSION['error']; 
-       echo '</div>'; 
-       unset($_SESSION['error']);        
-      }
-    ?>
-  </div> 
   <div class="row">
     <div class="col">
     <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">

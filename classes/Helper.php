@@ -17,9 +17,19 @@ class Helper{
 	{
 		if ($type == "error") {
 			$_SESSION['ERROR_MSG'] = $text;
-		}else{
+		}elseif($type == "success"){
 			$_SESSION['SUCCESS_MSG'] = $text;
 		}
+		/*
+		switch ($type) {
+			case 'error':
+				$_SESSION['ERROR_MSG'] = $text;
+				break;
+			
+			default:
+				$_SESSION['SUCCESS_MSG'] = $text;
+				break;
+		}*/
 	}
 
 	public static function writeMessage()
@@ -31,7 +41,7 @@ class Helper{
 
 		if (isset($_SESSION['SUCCESS_MSG'])) {
 			echo "<div class='alert alert-success'>" . $_SESSION['SUCCESS_MSG'] . "</div>";
-			unset($_SESSION['SUCCESS_MSG']);
+			//unset($_SESSION['SUCCESS_MSG']);
 		}
 	}
 }
