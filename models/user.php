@@ -21,7 +21,7 @@ class UserModel extends Model{
 			//$this->execute();
 
 			if ($this->single() > 0) {
-				$_SESSION['error'] = "Email already exists!";				
+				Helper::setMessage("Email already exists!", "error");			
 				return;
 		    }else{
 		    	//$password = md5($post['lozinka']);
@@ -138,7 +138,7 @@ class UserModel extends Model{
 				$row = $this->single();
 
 				if ($post['email'] != $row['email']) {
-					$_SESSION['error_login'] = "Incorrect email!";
+					Helper::setMessage("Incorrect email!", "error");
 					return;
 				}
 
@@ -155,7 +155,7 @@ class UserModel extends Model{
 					header('Location: ' . ROOT_PATH . 'home');
 					
 				}else{
-					$_SESSION['error_login'] = "Incorrect password!";
+					Helper::setMessage("Incorrect password!", "error");
 				}
 		    }
 		}			
@@ -170,6 +170,7 @@ class UserModel extends Model{
 			$this->bind(":token", $this->tk);
 			$this->execute();
 			unset($_SESSION['activate']);
+			//Helper::setMessage("Now you can log in.");
 			$_SESSION['activate'] = "Now you can log in.";
 			header('Location: ' . ROOT_PATH . 'users/login');
 	    }catch(Exception $e){

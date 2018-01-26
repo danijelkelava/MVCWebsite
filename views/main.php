@@ -41,7 +41,7 @@
 </nav>
 
 <main role="main" class="container">
-	
+	  <?php Helper::writeMessage(); ?>
 		<?php require $view; ?>
 
 </main><!-- /.container -->

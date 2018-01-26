@@ -13,4 +13,25 @@ class Helper{
 		echo date_format($newDate,"Y/m/d");
 	}
 
+	public static function setMessage($text, $type)
+	{
+		if ($type == "error") {
+			$_SESSION['ERROR_MSG'] = $text;
+		}else{
+			$_SESSION['SUCCESS_MSG'] = $text;
+		}
+	}
+
+	public static function writeMessage()
+	{
+		if (isset($_SESSION['ERROR_MSG'])) {
+			echo "<div class='alert alert-danger'>" . $_SESSION['ERROR_MSG'] . "</div>";
+			unset($_SESSION['ERROR_MSG']);
+		}
+
+		if (isset($_SESSION['SUCCESS_MSG'])) {
+			echo "<div class='alert alert-success'>" . $_SESSION['SUCCESS_MSG'] . "</div>";
+			unset($_SESSION['SUCCESS_MSG']);
+		}
+	}
 }

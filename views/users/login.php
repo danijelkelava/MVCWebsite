@@ -7,23 +7,6 @@
 </div>
 <div class="container">
   <div class="row">
-    <?php 
-      if (isset($_SESSION['activate'])) {
-       echo '<div class="alert alert-primary" role="alert">';
-       echo $_SESSION['activate']; 
-       echo '</div>'; 
-       unset($_SESSION['activate']);        
-      }
-
-      if (isset($_SESSION['error_login'])) {
-       echo '<div class="alert alert-danger" role="alert">';
-       echo $_SESSION['error_login']; 
-       echo '</div>'; 
-       unset($_SESSION['error_login']);        
-      }
-    ?>
-  </div>
-  <div class="row">
     <div class="col">
     <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
 
