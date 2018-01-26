@@ -125,18 +125,18 @@ class UserModel extends Model{
 
 		if ($post['login']) {
 
-			unset($_SESSION['SUCCESS_MSG']);
+			//unset($_SESSION['SUCCESS_MSG']);
 			$this->query("SELECT * FROM korisnik WHERE email=:email AND active=1");
 			$this->bind(":email", $post['email']);
 
 			$row = $this->single();
-
+            
 			if (isset($row)) {
 				$this->query("SELECT * FROM korisnik WHERE id='" . $row['id'] . "' ");
 
 				$row = $this->single();
 
-				if ($post['email'] != $row['email']) {
+				if ($post['email'] !== $row['email']) {
 					Helper::setMessage("Incorrect email!", "error");
 					return;
 				}

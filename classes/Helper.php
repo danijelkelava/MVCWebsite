@@ -41,7 +41,7 @@ class Helper{
 
 		if (isset($_SESSION['SUCCESS_MSG'])) {
 			echo "<div class='alert alert-success'>" . $_SESSION['SUCCESS_MSG'] . "</div>";
-			//unset($_SESSION['SUCCESS_MSG']);
+			unset($_SESSION['SUCCESS_MSG']);
 		}
 	}
 }
