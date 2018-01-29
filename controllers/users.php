@@ -31,7 +31,7 @@ class Users extends Controller{
 		unset($_SESSION['is_logged']);
 		unset($_SESSION['USER']);
 		session_destroy();
-		header('Location: ' . ROOT_PATH );
+		header('Location: ' . ROOT_PATH . 'users/login');
 	}
 
 	public function activate()
