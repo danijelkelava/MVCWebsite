@@ -2,6 +2,20 @@
 
 class Helper{
 
+	public static function inputExists($type = 'post'){
+		switch ($type) {
+			case 'post':
+				return (!empty($_POST)) ? true : false;
+				break;
+			case 'get':
+			return (!empty($_GET)) ? true : false;
+				break;
+			default:
+				return false;
+				break;
+		}
+	}
+
 	public static function htmlout($param)
 	{
 		echo htmlspecialchars($param, ENT_QUOTES, 'UTF-8');
@@ -36,12 +50,12 @@ class Helper{
 	{
 		if (isset($_SESSION['ERROR_MSG'])) {
 			echo "<div class='alert alert-danger'>" . $_SESSION['ERROR_MSG'] . "</div>";
-			unset($_SESSION['ERROR_MSG']);
+			//unset($_SESSION['ERROR_MSG']);
 		}
 
 		if (isset($_SESSION['SUCCESS_MSG'])) {
 			echo "<div class='alert alert-success'>" . $_SESSION['SUCCESS_MSG'] . "</div>";
-			unset($_SESSION['SUCCESS_MSG']);
+			//unset($_SESSION['SUCCESS_MSG']);
 		}
 	}
 }

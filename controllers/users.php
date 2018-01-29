@@ -4,8 +4,14 @@ class Users extends Controller{
 
 	protected function register()
 	{
+		if (Helper::inputExists()) {
+			$validation = new Validation();
+		}
+
 		$viewmodel = new UserModel();
 		$this->ReturnView($viewmodel->register(), true);
+
+		
 	}
 
 	protected function login()

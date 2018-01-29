@@ -12,9 +12,12 @@ class UserModel extends Model{
 
 	public function register()
 	{
+
         $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         if ($post['register']) {
+        	unset($_SESSION['SUCCESS_MSG']);
+        	unset($_SESSION['ERROR_MSG']);
         	$this->query("SELECT * FROM korisnik WHERE email=:email");
 			$this->bind(":email", $post['email']);
 
@@ -25,6 +28,12 @@ class UserModel extends Model{
 		    	//$password = md5($post['lozinka']);
 		    	$password = password_hash($post['lozinka'], PASSWORD_DEFAULT);
 		        $token = bin2hex(mt_rand(10,40000));
+
+		        try{
+
+		        }catch(Exception $e){
+
+		        }
 
 	            $this->query("INSERT INTO korisnik SET ime=:ime, prezime=:prezime, email=:email, lozinka=:lozinka, token=:token, active=0, datum_registracije=now()");
 
@@ -39,17 +48,21 @@ class UserModel extends Model{
 				if ($this->lastInsertId()) {
                 	$user = $this->getUser($post['email']);
 				    $_SESSION['id'] = $user['id'];
-                	$this->sendEmail($user['email'], $user['id'], $token);
-                	Helper::setMessage("Check your email for activation link.", "success");
-                	header('Location: ' . ROOT_PATH . 'users/login');
+				    if ($this->sendEmail($user['email'], $user['id'], $token)) {
+				    	Helper::setMessage("Check your email for activation link.", "success");
+                	    header('Location: ' . ROOT_PATH . 'users/login');
+
+				    }else{
+				    	Helper::setMessage("Register issue. Setup your SMTP server!", "error");
+                	    header('Location: ' . ROOT_PATH . 'users/login');
+
+				    }				                    	
                 	return;
                 }
 
 		    }
         }
-
-		return;	
-        
+		return;	        
 	}
 
 	private function getUser($email){
@@ -88,12 +101,12 @@ class UserModel extends Model{
 	    $mail->Port = 587;                                    // TCP port to connect to
 
 	    //Recipients
-	    $mail->setFrom('from@example.com', 'Mailer');
-	    $mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
-	    $mail->addAddress('ellen@example.com');               // Name is optional
-	    $mail->addReplyTo('info@example.com', 'Information');
-	    $mail->addCC('cc@example.com');
-	    $mail->addBCC('bcc@example.com');
+	    //$mail->setFrom('from@example.com', 'Mailer');
+	    //$mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
+	    //$mail->addAddress('ellen@example.com');               // Name is optional
+	    //$mail->addReplyTo('info@example.com', 'Information');
+	    //$mail->addCC('cc@example.com');
+	    //$mail->addBCC('bcc@example.com');
 
 	    //Attachments
 	    //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
@@ -125,16 +138,12 @@ class UserModel extends Model{
 
 		if ($post['login']) {
 
-			//unset($_SESSION['SUCCESS_MSG']);
+			unset($_SESSION['SUCCESS_MSG']);
+			unset($_SESSION['ERROR_MSG']);
 			$this->query("SELECT * FROM korisnik WHERE email=:email AND active=1");
 			$this->bind(":email", $post['email']);
 
 			$row = $this->single();
-
-            if (empty($row)) {
-            	Helper::setMessage("error", "error");
-            	return;
-            }
 
 			if (isset($row)) {
 				$this->query("SELECT * FROM korisnik WHERE id='" . $row['id'] . "' ");

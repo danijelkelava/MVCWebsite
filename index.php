@@ -3,6 +3,7 @@ session_start();
 
 require "config.php";
 require "classes/Helper.php";
+require "classes/Validation.php";
 require "classes/Bootstrap.php";
 require "classes/Controller.php";
 require "classes/Model.php";
