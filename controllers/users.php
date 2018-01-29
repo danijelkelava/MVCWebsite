@@ -6,6 +6,12 @@ class Users extends Controller{
 	{
 		if (Helper::inputExists()) {
 			$validation = new Validation();
+			$validation->check($_POST, [
+				"ime"=>["required"=>true, "min"=>2, "max"=>30, "text"=>true],
+				"prezime"=>["required"=>true, "min"=>2, "max"=>30, "text"=>true],
+				"email"=>["required"=>true, "email"=>true],
+				"lozinka"=>["required"=>true, "min"=>6]
+			]);
 		}
 
 		$viewmodel = new UserModel();
