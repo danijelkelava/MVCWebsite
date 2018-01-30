@@ -37,7 +37,6 @@ class UserModel extends Model{
 				Helper::setMessage("Email already exists!", "error");	
 				return;
 		    }else{
-		    	//$password = md5($post['lozinka']);
 		    	$password = password_hash($post['lozinka'], PASSWORD_DEFAULT);
 		        $token = bin2hex(mt_rand(10,40000));
 
