@@ -3,10 +3,18 @@
 class Validation{
 
 	private $passed;
-	private $errors = [];
+	public static $errors = [];
 
 	private function addError($item, $error){
-		$this->errors[$item] = $error;
+		self::$errors[$item] = $error;
+	}
+
+	public function errors(){
+		return $this->errors;
+	}
+
+	public function passed(){
+		return $this->passed;
 	}
 
 	public function check($source, $items = [])
@@ -60,8 +68,10 @@ class Validation{
 		        }				
 			}			
 		}
-		var_dump($this->errors);
-		die();
+		if (empty(self::$errors)) {
+			$this->passed = true;
+		}
+		return $this;
 	}
 
 }

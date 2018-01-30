@@ -16,6 +16,15 @@ class Helper{
 		}
 	}
 
+	public static function get($item){
+		if (isset($_POST[$item])) {
+			return $_POST[$item];
+		}elseif(isset($_GET[$item])){
+			return $_GET[$item];
+		}
+		return '';
+	}
+
 	public static function htmlout($param)
 	{
 		echo htmlspecialchars($param, ENT_QUOTES, 'UTF-8');

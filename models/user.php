@@ -9,15 +9,27 @@ class UserModel extends Model{
 
 	public $id;
 	public $tk;
+	private $pass = false;
+
+	public function setPass($boolean)
+	{
+		$this->pass = $boolean;
+	}
 
 	public function register()
 	{
-
+        
         $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         if ($post['register']) {
-        	unset($_SESSION['SUCCESS_MSG']);
+
+            unset($_SESSION['SUCCESS_MSG']);
         	unset($_SESSION['ERROR_MSG']);
+
+        	if ($this->pass === false) {
+        		return false;
+        	}
+        	
         	$this->query("SELECT * FROM korisnik WHERE email=:email");
 			$this->bind(":email", $post['email']);
 
@@ -28,12 +40,6 @@ class UserModel extends Model{
 		    	//$password = md5($post['lozinka']);
 		    	$password = password_hash($post['lozinka'], PASSWORD_DEFAULT);
 		        $token = bin2hex(mt_rand(10,40000));
-
-		        try{
-
-		        }catch(Exception $e){
-
-		        }
 
 	            $this->query("INSERT INTO korisnik SET ime=:ime, prezime=:prezime, email=:email, lozinka=:lozinka, token=:token, active=0, datum_registracije=now()");
 
@@ -54,7 +60,7 @@ class UserModel extends Model{
 
 				    }else{
 				    	Helper::setMessage("Register issue. Setup your SMTP server!", "error");
-                	    header('Location: ' . ROOT_PATH . 'users/login');
+                	    header('Location: ' . ROOT_PATH . 'users/register');
 
 				    }				                    	
                 	return;

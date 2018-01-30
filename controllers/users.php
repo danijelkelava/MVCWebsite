@@ -4,6 +4,9 @@ class Users extends Controller{
 
 	protected function register()
 	{
+        
+        $viewmodel = new UserModel();
+
 		if (Helper::inputExists()) {
 			$validation = new Validation();
 			$validation->check($_POST, [
@@ -12,11 +15,13 @@ class Users extends Controller{
 				"email"=>["required"=>true, "email"=>true],
 				"lozinka"=>["required"=>true, "min"=>6]
 			]);
+
+			if ($validation->passed()) {
+				$viewmodel->setPass(true);
+			}
 		}
-
-		$viewmodel = new UserModel();
+		
 		$this->ReturnView($viewmodel->register(), true);
-
 		
 	}
 
