@@ -12,12 +12,14 @@
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" class="form-control" id="email" name="email" aria-describedby="" placeholder="Email">
+        <input type="text" class="form-control" id="email" name="email" aria-describedby="" placeholder="Email" value="<?php echo Helper::get('email'); ?>">
+        <p class="text-danger"><?php if(isset(Validation::$errors['email'])){ echo Validation::$errors['email']; } ?></p>
       </div>
 
       <div class="form-group">
         <label for="lozinka">Password</label>
         <input type="password" class="form-control" id="lozinka" name="lozinka" aria-describedby="" placeholder="Password">
+        <p class="text-danger"><?php if(isset(Validation::$errors['lozinka'])){ echo Validation::$errors['lozinka']; } ?></p>
       </div>
       
       <input type="submit" class="btn btn-primary" name="login" value="Login">

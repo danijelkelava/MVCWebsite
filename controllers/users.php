@@ -28,6 +28,19 @@ class Users extends Controller{
 	protected function login()
 	{
 		$viewmodel = new UserModel();
+
+		if (Helper::inputExists()) {
+			$validation = new Validation();
+			$validation->check($_POST, [
+				"email"=>["required"=>true, "email"=>true],
+				"lozinka"=>["required"=>true, "min"=>6]
+			]);
+
+			if ($validation->passed()) {
+				$viewmodel->setPass(true);
+			}
+		}
+
 		$this->ReturnView($viewmodel->login(), true);
 	}
 

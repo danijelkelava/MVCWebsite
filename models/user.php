@@ -145,6 +145,13 @@ class UserModel extends Model{
 		if ($post['login']) {
 
 			unset($_SESSION['SUCCESS_MSG']);
+        	unset($_SESSION['ERROR_MSG']);
+
+			if ($this->pass === false) {
+        		return false;
+        	}
+
+			unset($_SESSION['SUCCESS_MSG']);
 			unset($_SESSION['ERROR_MSG']);
 			$this->query("SELECT * FROM korisnik WHERE email=:email AND active=1");
 			$this->bind(":email", $post['email']);
