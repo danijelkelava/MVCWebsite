@@ -23,9 +23,8 @@ abstract class Controller{
 		return $this->{$this->action}();//ako action = "" onda je to index, $this->index()
 	}
 
-	protected function ReturnView($viewmodel, $fullview)
+	protected function ReturnView($viewmodel, $fullview, $data = [])
 	{
-
 		$view = 'views/' . get_class($this) . '/' . $this->action . '.php';
 		if ($fullview) {
 			require 'views/main.php';

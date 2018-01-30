@@ -6,7 +6,7 @@ class Users extends Controller{
 	{
         
         $viewmodel = new UserModel();
-
+        $data = [];
 		if (Helper::inputExists() && $_POST['register']) {
 			$validation = new Validation();
 			$validation->check($_POST, [
@@ -18,17 +18,19 @@ class Users extends Controller{
 
 			if ($validation->passed()) {
 				$viewmodel->registerUser();
+			}else{
+				$data = ['errors'=>$validation->errors()];
 			}
 		}
 		
-		$this->ReturnView($viewmodel->register(), true);
+		$this->ReturnView($viewmodel->register(), true, $data);
 		
 	}
 
 	protected function login()
 	{
 		$viewmodel = new UserModel();
-
+        $data = [];
 		if (Helper::inputExists() && $_POST['login']) {
 			$validation = new Validation();
 			$validation->check($_POST, [
@@ -38,10 +40,14 @@ class Users extends Controller{
 
 			if ($validation->passed()) {
 				$viewmodel->loginUser();
+			}else{
+				$data = ['errors'=>$validation->errors()];
 			}
 		}
 
-		$this->ReturnView($viewmodel->login(), true);
+		
+
+		$this->ReturnView($viewmodel->login(), true, $data);
 	}
 
 	public function logout()

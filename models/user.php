@@ -46,7 +46,7 @@ class UserModel extends Model{
 				if ($this->lastInsertId()) {
                 	$user = $this->getUser($post['email']);
 				    $_SESSION['id'] = $user['id'];
-				    $this->sendEmail($user['email'], $user['id'], $token);                  	
+				    $this->sendEmail($user['email'], $user['id'], $token);
                 	return;
                 }
 

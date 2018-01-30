@@ -10,7 +10,7 @@ class Validation{
 	}
 
 	public function errors(){
-		return $this->errors;
+		return self::$errors;
 	}
 
 	public function passed(){
