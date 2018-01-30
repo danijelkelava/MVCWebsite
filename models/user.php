@@ -11,25 +11,18 @@ class UserModel extends Model{
 	public $tk;
 	private $pass = false;
 
-	public function setPass($boolean)
+	public function register()
 	{
-		$this->pass = $boolean;
+		return;
 	}
 
-	public function register()
+	public function registerUser()
 	{
         
         $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         if ($post['register']) {
 
-            unset($_SESSION['SUCCESS_MSG']);
-        	unset($_SESSION['ERROR_MSG']);
-
-        	if ($this->pass === false) {
-        		return false;
-        	}
-        	
         	$this->query("SELECT * FROM korisnik WHERE email=:email");
 			$this->bind(":email", $post['email']);
 
@@ -53,15 +46,7 @@ class UserModel extends Model{
 				if ($this->lastInsertId()) {
                 	$user = $this->getUser($post['email']);
 				    $_SESSION['id'] = $user['id'];
-				    if ($this->sendEmail($user['email'], $user['id'], $token)) {
-				    	Helper::setMessage("Check your email for activation link.", "success");
-                	    header('Location: ' . ROOT_PATH . 'users/login');
-
-				    }else{
-				    	Helper::setMessage("Register issue. Setup your SMTP server!", "error");
-                	    header('Location: ' . ROOT_PATH . 'users/register');
-
-				    }				                    	
+				    $this->sendEmail($user['email'], $user['id'], $token);                  	
                 	return;
                 }
 
@@ -130,28 +115,23 @@ class UserModel extends Model{
 	    
 	    $mail->addAddress($email, 'Novi korisnik');
 	    $mail->send();
-	    echo 'Message has been sent';
-		} catch (Exception $e) {
-		    echo 'Message could not be sent.';
-		    echo 'Mailer Error: ' . $mail->ErrorInfo;
+	    Helper::setMessage("You are registered. Check your email for activation link.", "success");	
+		}catch(Exception $e) {		   
+		    Helper::setMessage('Mailer Error: ' . $mail->ErrorInfo, "error");
 		}
     }
 
-	public function login()
+    public function login()
+    {
+    	return;
+    }
+
+	public function loginUser()
 	{
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
 		if ($post['login']) {
 
-			unset($_SESSION['SUCCESS_MSG']);
-        	unset($_SESSION['ERROR_MSG']);
-
-			if ($this->pass === false) {
-        		return false;
-        	}
-
-			unset($_SESSION['SUCCESS_MSG']);
-			unset($_SESSION['ERROR_MSG']);
 			$this->query("SELECT * FROM korisnik WHERE email=:email AND active=1");
 			$this->bind(":email", $post['email']);
 

@@ -7,7 +7,7 @@ class Users extends Controller{
         
         $viewmodel = new UserModel();
 
-		if (Helper::inputExists()) {
+		if (Helper::inputExists() && $_POST['register']) {
 			$validation = new Validation();
 			$validation->check($_POST, [
 				"ime"=>["required"=>true, "min"=>2, "max"=>30, "text"=>true],
@@ -17,7 +17,7 @@ class Users extends Controller{
 			]);
 
 			if ($validation->passed()) {
-				$viewmodel->setPass(true);
+				$viewmodel->registerUser();
 			}
 		}
 		
@@ -29,7 +29,7 @@ class Users extends Controller{
 	{
 		$viewmodel = new UserModel();
 
-		if (Helper::inputExists()) {
+		if (Helper::inputExists() && $_POST['login']) {
 			$validation = new Validation();
 			$validation->check($_POST, [
 				"email"=>["required"=>true, "email"=>true],
@@ -37,7 +37,7 @@ class Users extends Controller{
 			]);
 
 			if ($validation->passed()) {
-				$viewmodel->setPass(true);
+				$viewmodel->loginUser();
 			}
 		}
 
