@@ -19,6 +19,7 @@ class Users extends Controller{
 			if ($validation->passed()) {
 				$viewmodel->registerUser();
 			}else{
+				
 				$data = ['errors'=>$validation->errors()];
 			}
 		}
